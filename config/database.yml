@@ -1,0 +1,25 @@
+development:
+  adapter: postgresql
+  host: localhost
+  username: invierno
+  password: porteno
+  encoding: unicode
+  database: rentadmin
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  username: invierno
+  host: localhost
+  password: porteno
+  encoding: unicode
+  database: rentadmin_test
+  pool: 5
+  timeout: 5000
+  
+#production:
+  #adapter: sqlite3
+  #database: db/production.sqlite3
+  #pool: 5
+  #timeout: 5000
