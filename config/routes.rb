@@ -31,6 +31,21 @@ Rentadmin::Application.routes.draw do
   #     resources :comments, :sales
   #     resource :seller
   #   end
+  resources :makes do
+    resources :models
+  end
+  resources :models do
+      resources :vehicles
+  end
+  resources :groups do
+    resources :models
+  end
+  resources :reservations do
+    resources :vehicles
+  end
+  resources :vehicles do
+    resources :reservations
+  end
 
   # Sample resource route with more complex sub-resources
   #   resources :products do
