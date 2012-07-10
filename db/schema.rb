@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709172452) do
+ActiveRecord::Schema.define(:version => 20120710121031) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -22,25 +22,34 @@ ActiveRecord::Schema.define(:version => 20120709172452) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.string   "group_name"
+    t.string   "description", :limit => 1000
   end
+
+  add_index "groups", ["group_name"], :name => "index_groups_on_group_name", :unique => true
 
   create_table "makes", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "make_name"
+    t.string   "description", :limit => 400
   end
 
+  add_index "makes", ["make_name"], :name => "index_makes_on_make_name", :unique => true
+
   create_table "models", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "make_id"
     t.integer  "model_id"
     t.integer  "group_id"
+    t.string   "model_name"
+    t.string   "description", :limit => 400
   end
+
+  add_index "models", ["model_name"], :name => "index_models_on_model_name", :unique => true
 
   create_table "rates", :force => true do |t|
     t.string   "type"

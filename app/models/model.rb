@@ -9,11 +9,20 @@
 #  make_id     :integer
 #  model_id    :integer
 #  group_id    :integer
+#  model_name  :string(255)
 #
 
 class Model < ActiveRecord::Base
-  attr_accessible :description
+  attr_accessible :model_name, :description
   belongs_to :make
   belongs_to :group
   has_many :vehicles
+  validates_associated :vehicles
+  validates :make, :presence => { :message => "Make is required" }
+  #validates :group, :presence => true
+  validates :model_name, :presence => { :message => "Model name is required" }, :uniqueness => true
+  validates :description, :length => {
+									    :maximum   => 400,
+									    :too_long  => "Description must not exceed 400 characters"
+									  }
 end
