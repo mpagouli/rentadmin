@@ -1,0 +1,275 @@
+@import "bootstrap";
+
+
+
+/* Mixins, Variables, etc. */
+
+$grayMediumLight: #5F5F5F;
+$grayMediumDark: #5C5C5C;
+$grayMediumLighter: #596378;
+$black: #000000;
+$grayMediumDarker: #1C1C1C;
+$grayLight: #373737;
+$beepGrayLight: #323232;
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
+
+
+/* Steering Wheel Main Div */
+#wheelmenu {
+	position: relative;
+	margin: 80px auto;
+	width: 500px;
+	height: 500px;
+	background: transparent;
+
+	/* Shine on the Round Part of Steering Wheel */
+	&::before {
+		border: 4px solid $grayMediumLight;
+	    height: 93%;
+	    left: 3.5%;
+	    opacity: 0.4;
+	    top: 3.5%;
+	    width: 93%;
+	    content:'';
+		position: absolute;
+		border-radius: 50%;
+		background:trasparent;
+		z-index:3;
+		@include box_sizing;
+	}
+
+	/* Round Part of Steering Wheel */
+	#wheel_round {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background: black;
+		background: -webkit-gradient(linear, center top, center bottom, from($grayMediumDarker), color-stop(0.02, $grayMediumDarker), color-stop(0.09, $black), color-stop(0.93, $black), to($grayMediumDark));
+		background: -webkit-linear-gradient(center top , $grayMediumDarker, $grayMediumDarker 2%, $black 9%, $black 93%, $grayMediumDark);
+		background: -moz-linear-gradient(center top , $grayMediumDarker, $grayMediumDarker 2%, $black 9%, $black 93%, $grayMediumDark);
+		background: -ms-linear-gradient(center top , $grayMediumDarker, $grayMediumDarker 2%, $black 9%, $black 93%, $grayMediumDark);
+		background: -o-linear-gradient(center top , $grayMediumDarker, $grayMediumDarker 2%, $black 9%, $black 93%, $grayMediumDark);
+		border-right: 2px solid rgba(89, 99, 120, 0.4);
+	    border-top: 2px solid rgba(89, 99, 120, 0.4);
+		-moz-transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg);
+		-ms-transform: rotate(-135deg);
+		-o-transform: rotate(-135deg);
+		@include box_sizing;
+
+		/* Inner Parts  */
+		#wheel_inner {
+			height: 80%;
+		    left: 10%;
+		    position: absolute;
+		    top: 10%;
+		    width: 80%;
+			border-radius: 50%;
+			background: white;
+			overflow:hidden;
+			z-index:2;
+			-moz-transform: rotate(135deg);
+			-webkit-transform: rotate(135deg);
+			-ms-transform: rotate(135deg);
+			-o-transform: rotate(135deg);
+
+			/* Two Horizontal Rotated */
+			&::before {
+			    content:'';
+				height: 8.3%;
+			    left: 0px;
+			    position: absolute;
+			    top: 30%;
+			    width: 47.917%;
+				border-radius: 5%;
+				background: black;
+				background: -webkit-gradient(linear, center top, center bottom, from($black), color-stop(0.3, $black), color-stop(0.5, $grayLight), color-stop(0.7, $black), to($black));
+				background: -webkit-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -moz-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -ms-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				transform:rotate(20deg);
+				-ms-transform:rotate(20deg); 
+				-moz-transform: rotate(20deg); 
+				-webkit-transform:rotate(20deg); 
+				-o-transform:rotate(20deg); 
+				-moz-transform-origin: 20% 80%;
+				-ms-transform-origin: 20% 80%;
+				-webkit-transform-origin: 20% 80%;
+				-o-transform-origin: 20% 80%;
+			}
+			&::after {
+			    content:'';
+				height: 8.3%;
+			    right: 0px;
+			    position: absolute;
+			    top: 30%;
+			    width: 47.917%;
+				border-radius: 5%;
+				background: black;
+				background: -webkit-gradient(linear, center top, center bottom, from($black), color-stop(0.3, $black), color-stop(0.5, $grayLight), color-stop(0.7, $black), to($black));
+				background: -webkit-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -moz-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -ms-linear-gradient(top center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				transform:rotate(-20deg);
+				-ms-transform:rotate(-20deg); 
+				-moz-transform: rotate(-20deg); 
+				-webkit-transform:rotate(-20deg); 
+				-o-transform:rotate(-20deg); 
+				-moz-transform-origin: 80% 120%;
+				-ms-transform-origin: 80% 120%;
+				-webkit-transform-origin: 80% 120%;
+				-o-transform-origin: 80% 120%;
+			}
+
+			/* One Vertical */
+			#wheel_vertical {
+				height: 49.17%;
+			    bottom: 0px;
+			    position: absolute;
+				left: 44%;
+			    width: 9.17%;
+				border-radius: 5%;
+				background: black;
+				background: -webkit-gradient(linear, left center, right center, from($black), color-stop(0.3, $black), color-stop(0.5, $grayLight), color-stop(0.7, $black), to($black));
+				background: -webkit-linear-gradient(left center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -moz-linear-gradient(left center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+				background: -ms-linear-gradient(left center , $black, $black 30%, $grayLight 50%, $black 70%, $black);
+			}
+
+			/* Central Part */
+			#beep {
+				border-radius: 100px 100px 180px 180px / 20px 20px 250px 250px;
+			    height: 29.17%;
+			    left: 30%;
+			    position: absolute;
+			    top: 38%;
+			    width: 37.5%;
+			    z-index: 1;
+				background: black;
+				background: -webkit-gradient(linear, center top, center bottom, from($black), to($beepGrayLight));
+				background: -moz-linear-gradient(center top , $black, $beepGrayLight);
+				background: -webkit-linear-gradient(center top , $black, $beepGrayLight);
+				background: -ms-linear-gradient(center top , $black, $beepGrayLight);
+				background: -o-linear-gradient(center top , $black, $beepGrayLight);
+
+				/* Shine on Central Part */
+				&::after {
+				    background: $grayLight;
+				    border-radius: 100px 100px 180px 180px / 20px 20px 250px 250px;
+				    content: "";
+				    height: 35.71%;
+				    left: 8%;
+				    position: absolute;
+				    top: 8%;
+				    width: 85.71%;
+				}
+			}
+
+            /* Empty Space */
+			#empty_space{
+				position:absolute;
+				width:100%;
+				height:100%;
+				border-radius: 50%;
+
+				/* Text Form */
+				.empty_text{
+					font-family: 'Tangerine', serif;
+					font-size: 48px;
+					text-shadow: 4px 4px 4px #aaa;
+					background:transparent;
+				}
+
+				/* Top */
+				#empty_top{
+					position:absolute;
+					width:100%;
+					border-radius: 50%;
+					z-index:-1;
+					height:40%;
+
+					/* Text Position */
+					#top_t{
+					    position: absolute;
+					    top:30%;
+					    left:37%;
+					}
+				}
+
+				/* Left */
+				#empty_left {
+				    border-radius: 50%;
+				    bottom: 0;
+				    height: 60%;
+				    left: -40px;
+				    position: absolute;
+				    width: 64%;
+				    z-index: -1;
+				    transform: rotate(30deg) skew(30deg);
+				    -moz-transform: rotate(30deg) skew(30deg);
+				    -webkit-transform: rotate(30deg) skew(30deg);
+				    -ms-transform: rotate(30deg) skew(30deg);
+				    -o-transform: rotate(30deg) skew(30deg);
+				    transform-origin: 54% 30%;
+				    -moz-transform-origin: 54% 30%;
+				    -webkit-transform-origin: 54% 30%;
+				    -ms-transform-origin: 54% 30%;
+				    -o-transform-origin: 54% 30%;
+
+				    /* Text Position */
+				    #left_t{
+						position: absolute;
+					    top:34%;
+					    left:22%;
+					    -moz-transform: skew(-30deg) rotate(-155deg);
+					}
+				}
+
+				/* Right */
+				#empty_right {
+				    border-radius: 50%;
+				    bottom: 0;
+				    height: 60%;
+				    right: -40px;
+				    position: absolute;
+				    width: 64%;
+				    z-index: -1;
+				    transform: rotate(-30deg) skew(-30deg);
+				    -moz-transform: rotate(-30deg) skew(-30deg);
+				    -webkit-transform: rotate(-30deg) skew(-30deg);
+				    -ms-transform: rotate(-30deg) skew(-30deg);
+				    -o-transform: rotate(-30deg) skew(-30deg);
+				    transform-origin: 38% 6%;
+				    -moz-transform-origin: 38% 6%;
+				    -webkit-transform-origin: 38% 6%;
+				    -ms-transform-origin: 38% 6%;
+				    -o-transform-origin: 38% 6%;
+
+				    /* Text Position */
+				    #right_t{
+						position: absolute;
+					    top:30%;
+					    left:27%;
+					    transform: skew(30deg) rotate(150deg);
+					    -moz-transform: skew(30deg) rotate(150deg);
+					    -webkit-transform: skew(30deg) rotate(150deg);
+					    -ms-transform: skew(30deg) rotate(150deg);
+					    -o-transform: skew(30deg) rotate(150deg);
+					}
+				}
+
+				
+
+			}
+		}
+
+	}
+
+}
