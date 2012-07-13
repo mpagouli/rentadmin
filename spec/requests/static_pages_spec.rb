@@ -15,7 +15,7 @@ describe "StaticPages" do
 
   describe "Home Page" do
   	before { visit root_path } 
-  	let(:page_title) { 'Home Page' }
+  	let(:page_title) { 'Open Fleet' }
   	it_should_behave_like "all static pages"
   end
 
