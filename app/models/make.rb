@@ -11,9 +11,14 @@
 
 class Make < ActiveRecord::Base
   attr_accessible :make_name, :description
+
+  before_save do |make|
+  	make.make_name = make_name.downcase
+  end
+
   has_many :models
   validates_associated :models
-  validates :make_name, :presence => { :message => "Make name is required" }, :uniqueness => true
+  validates :make_name, :presence => { :message => "Make name is required" }, :uniqueness => { case_sensitive: false }
   validates :description, :length => {
 									    :maximum   => 400,
 									    :too_long  => "Description must not exceed 400 characters"

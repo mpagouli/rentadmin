@@ -33,10 +33,10 @@ describe Make do
   	  before { @make.make_name = "valid name" }
   	  it { should be_valid }
   	end
-  	context "not unique" do 
+  	context "not unique (ignore case)" do 
   		before { @make_other = Make.new(make_name:"valid name")
   			     @make_other.save 
-  			 	 @make.make_name = "valid name"
+  			 	 @make.make_name = "VaLiD NaME"
   			     @make.save }
   		it { should_not be_valid }
   	end

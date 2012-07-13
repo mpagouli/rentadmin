@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710121031) do
+ActiveRecord::Schema.define(:version => 20120713114230) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(:version => 20120710121031) do
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "reservation_vehicles", ["reservation_id", "vehicle_id"], :name => "index_reservation_vehicles_on_reservation_id_and_vehicle_id", :unique => true
+
   create_table "reservations", :force => true do |t|
     t.datetime "startDate"
     t.datetime "endDate"
@@ -77,8 +79,9 @@ ActiveRecord::Schema.define(:version => 20120710121031) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
 
   create_table "vehicles", :force => true do |t|
@@ -87,5 +90,7 @@ ActiveRecord::Schema.define(:version => 20120710121031) do
     t.datetime "updated_at", :null => false
     t.integer  "model_id"
   end
+
+  add_index "vehicles", ["reg_no"], :name => "index_vehicles_on_reg_no", :unique => true
 
 end

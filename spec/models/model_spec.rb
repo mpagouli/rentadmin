@@ -55,12 +55,12 @@ describe Model do
   	  before { @model.model_name = "valid name" }
   	  it { should be_valid }
   	end
-  	context "not unique" do 
+  	context "not unique (ignore case)" do 
   		before { @model_other = Model.new(model_name:"valid name")
   			     @model_other.make = @make
   			     #@model_other.group = @group
   			     @model_other.save 
-  			 	 @model.model_name = "valid name"
+  			 	 @model.model_name = "VALID NAME"
   			     @model.save }
   		it { should_not be_valid }
   	end
