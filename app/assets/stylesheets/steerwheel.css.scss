@@ -229,6 +229,9 @@ $beepGrayLight: #323232;
 					    top:34%;
 					    left:22%;
 					    -moz-transform: skew(-30deg) rotate(-155deg);
+					    -webkit-transform: skew(-30deg) rotate(-155deg);
+					    -ms-transform: skew(-30deg) rotate(-155deg);
+					    -o-transform: skew(-30deg) rotate(-155deg);
 					}
 				}
 
