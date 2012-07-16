@@ -1,4 +1,8 @@
 <% provide(:title, @user.name) %>
+<h1><%= yield(:title) %></h1>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 <%= @user.email %>
 <p><%= link_to "Home", root_path %></p>
 <p><%= link_to "Profile", user_path(@user) %></p>

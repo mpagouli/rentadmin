@@ -7,13 +7,14 @@ describe "AuthenticationPages" do
   describe "Sign In Page" do
   	before { visit signin_path }
   	it { should have_selector('title', text:'Sign in') }
-  	it { should have_selector('h1',    text: 'Sign in') }
+  	it { should have_selector('h2', text: 'Sign in') }
+    it { should have_link('Help', href: help_path) }
   	context "with invalid information" do 
   		before { click_button "Sign in" }
   		it { should have_selector('title', text:'Sign in') }
   		it { should have_selector('div.alert.alert-error', text:'Invalid') }
   		context "after visiting another page" do
-  			before { click_link "Home" }
+  			before { click_link "Help" }
   			it { should_not have_selector('div.alert.alert-error') }
   		end
   	end
@@ -30,7 +31,7 @@ describe "AuthenticationPages" do
   		it { should_not have_link('Sign in', href: signin_path) }
   		context "followed by signout" do
         	before { click_link "Sign out" }
-        	it { should have_link('Sign in') }
+        	it { should have_button('Sign in') }
       	end
   	end
   end

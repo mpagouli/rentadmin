@@ -1,19 +1,27 @@
 <% provide(:title,"Sign in") %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(:session, url: sessions_path) do |f| %>
+  <div class="row">
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+    <div id="signin" class="span4">
+      <div class="well">
+        <h2><%= yield(:title) %></h2>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        <%= form_for(:session, url: sessions_path) do |f| %>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+          <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-    <p><%= link_to "Home", root_path %></p>
+    <div class="span7 offset1">
+      <h1>Heading</h1>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+    </div>
+    
   </div>
-</div>

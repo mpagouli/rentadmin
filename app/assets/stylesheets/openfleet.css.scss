@@ -1,11 +1,135 @@
 @import "bootstrap";
 
+
+
 /* Mixins, Variables, etc. */
+
+$grayMediumLight: #eaeaea;
+$backgroundCol: #d4d7fe;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
   box-sizing: border-box;
+}
+
+
+
+/* universal */
+
+html {
+  /*overflow-y: scroll;*/
+}
+
+body {
+  padding-top: 90px;
+  background-color: $backgroundCol;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/*.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}*/
+
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $grayLight;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+
+/* Overridden Bootstrap Styles */
+
+/*.container{
+  margin:auto 1%;
+  width:98%;
+}*/
+
+
+
+/* Header - Navigation Bar */
+
+#logo {
+  line-height: 1;
+  font-weight: bold;
+  img{
+    vertical-align:middle;
+  }
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  text-align:center;
+  a {
+    color: $gray;
+    &:hover { 
+      color: $grayDarker;
+    }
+  }  
+  small { 
+    float: left; 
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+
+/* Sign in Page */
+
+#signin{
+  margin-top:30px
 }
 
 
@@ -22,6 +146,7 @@
 
 
 /* forms */
+
 #error_explanation {
   color: #f00;
   ul {

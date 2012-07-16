@@ -10,11 +10,11 @@ describe "StaticPages" do
   	end
     it 'having page specific title' do
     	should have_selector('title', :text => page_title)
-	end
+	  end
   end
 
   describe "Home Page" do
-  	before { visit root_path } 
+  	before { visit home_path } 
   	let(:page_title) { 'Open Fleet' }
   	it_should_behave_like "all static pages"
   end
