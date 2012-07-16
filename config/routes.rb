@@ -47,6 +47,7 @@ Rentadmin::Application.routes.draw do
   resources :vehicles do
     resources :reservations
   end
+  resources :sessions, only: [:new, :create, :destroy]
 
   # Sample resource route with more complex sub-resources
   #   resources :products do
@@ -75,4 +76,6 @@ Rentadmin::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   match '/help', to: 'static_pages#help'
   match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 end

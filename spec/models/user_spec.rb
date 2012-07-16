@@ -22,6 +22,7 @@ describe User do
 	it { should respond_to(:email) }
 	it { should respond_to(:password_digest) }
 	it { should respond_to(:password) }					#virtual, not persisted
+	it { should respond_to(:remember_token) }
 	it { should respond_to(:password_confirmation) }	#virtual, not persisted
 	it { should respond_to(:authenticate) }
 
@@ -80,7 +81,6 @@ describe User do
 		end
 	end
 
-
 	describe "Password:" do
 		context "blank" do
 			before { @user.password = @user.password_confirmation = " " }
@@ -118,6 +118,11 @@ describe User do
 			it { should_not == user_for_invalid_password }
 			specify { user_for_invalid_password.should be_false }
 		end
+	end
+
+	describe "Remember Token:" do
+		before { @user.save }
+    	its(:remember_token) { should_not be_blank }
 	end
   
 end

@@ -1,2 +1,5 @@
 <% provide(:title, @user.name) %>
 <%= @user.email %>
+<p><%= link_to "Home", root_path %></p>
+<p><%= link_to "Profile", user_path(@user) %></p>
+<p><%= link_to "Sign out", signout_path, method: "delete" %></p>
