@@ -6,9 +6,13 @@ describe "AuthenticationPages" do
 
   describe "Sign In Page" do
   	before { visit signin_path }
-  	it { should have_selector('title', text:'Sign in') }
+  	it { should have_selector('title', text:'Open Fleet | Sign in') }
   	it { should have_selector('h2', text: 'Sign in') }
     it { should have_link('Help', href: help_path) }
+    it { should_not have_link('Admin', href: '#') }
+    it { should_not have_link('Board', href: '#') }
+    it { should_not have_link('Operation', href: '#') }
+    it { should_not have_link('Sign out', href: signout_path) }
   	context "with invalid information" do 
   		before { click_button "Sign in" }
   		it { should have_selector('title', text:'Sign in') }
@@ -21,26 +25,35 @@ describe "AuthenticationPages" do
   	context "with valid information" do 
   		let(:user) { FactoryGirl.create(:user) }
   		before { sign_in user }
-  		it { should have_selector('title', text: user.name) }
-      it { should have_link('Users', href: users_path) }
-  		it { should have_link('Profile', href: user_path(user)) }
-      it { should have_link('Settings', href: edit_user_path(user)) }
-  		it { should have_link('Sign out', href: signout_path) }
-  		it { should_not have_link('Sign in', href: signin_path) }
+  		#it { should have_selector('title', text: user.name) }
+      #it { should have_link('Users', href: users_path) }
+  		#it { should have_link('Profile', href: user_path(user)) }
+      #it { should have_link('Settings', href: edit_user_path(user)) }
+  		#it { should have_link('Sign out', href: signout_path) }
+  		it { should_not have_button('Sign in') }
+      it { should have_selector('title', text: 'Open Fleet') }
+      it { should have_selector('div', id: 'wheelmenu') }
+      it { should have_link('Sign out', href: signout_path) }
   		context "followed by signout" do
-        	before { click_link "Sign out" }
-        	it { should have_button('Sign in') }
-      	end
+        before { click_link "Sign out" }
+        it { should have_button('Sign in') }
+      end
   	end
   end
 
   describe "Authorization" do
     context "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+      context "in the Static Pages controller" do
+        describe "visiting home page" do
+          before { visit home_path }
+          it { should have_selector('title', text: 'Open Fleet | Sign in') }
+        end
+      end
       context "in the Users controller" do
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
-          it { should have_selector('title', text: 'Sign in') }
+          it { should have_selector('title', text: 'Open Fleet | Sign in') }
         end
         describe "submitting to the update action" do
           before { put user_path(user) }
@@ -48,7 +61,7 @@ describe "AuthenticationPages" do
         end
         describe "visiting the user index" do
           before { visit users_path }
-          it { should have_selector('title', text: 'Sign in') }
+          it { should have_selector('title', text: 'Open Fleet | Sign in') }
         end
       end
       context "when attempting to visit a protected page" do
@@ -81,12 +94,18 @@ describe "AuthenticationPages" do
     context "as non-admin user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:non_admin) { FactoryGirl.create(:user) }
-
       before { sign_in non_admin }
-
-      describe "submitting a DELETE request to the Users#destroy action" do
-        before { delete user_path(user) }
-        specify { response.should redirect_to(root_path) }        
+      context "in the Users controller" do
+        describe "submitting a DELETE request to the Users#destroy action" do
+          before { delete user_path(user) }
+          specify { response.should redirect_to(root_path) }        
+        end
+      end
+      context "in the Static Pages controller" do
+        describe "visiting home page" do
+          before { visit home_path }
+          it { should_not have_link('Admin') }
+        end
       end
     end
   end

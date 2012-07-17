@@ -6,3 +6,9 @@ def sign_in(user)
   # Sign in when not using Capybara as well.
   cookies[:remember_token] = user.remember_token
 end
+
+def sign_out(user)
+  click_link "Sign out"
+  # Sign in when not using Capybara as well.
+  #cookies.delete(:remember_token)
+end

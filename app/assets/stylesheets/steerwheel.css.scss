@@ -20,9 +20,9 @@ $beepGrayLight: #323232;
 /* Steering Wheel Main Div */
 #wheelmenu {
 	position: relative;
-	margin: 80px auto;
-	width: 500px;
-	height: 500px;
+	margin: 0px auto;
+	width: 400px;
+	height: 400px;
 	background: transparent;
 
 	/* Shine on the Round Part of Steering Wheel */
@@ -178,8 +178,10 @@ $beepGrayLight: #323232;
 
 				/* Text Form */
 				.empty_text{
-					font-family: 'Tangerine', serif;
-					font-size: 48px;
+					/*font-family: 'Tangerine', serif;*/
+					font-family: 'Aldrich', sans-serif;
+					/*font-size: 48px;*/
+					font-size: 32px;
 					text-shadow: 4px 4px 4px #aaa;
 					background:transparent;
 				}
@@ -195,8 +197,9 @@ $beepGrayLight: #323232;
 					/* Text Position */
 					#top_t{
 					    position: absolute;
-					    top:30%;
-					    left:37%;
+					    /*top:30%;left:37%;*/
+					    left:23%;
+					    top:45%;
 					}
 				}
 
@@ -219,12 +222,18 @@ $beepGrayLight: #323232;
 				    -webkit-transform-origin: 54% 30%;
 				    -ms-transform-origin: 54% 30%;
 				    -o-transform-origin: 54% 30%;
+				    /*transform-origin: 100% -190%;
+				    -moz-transform-origin: 100% -190%;
+				    -webkit-transform-origin: 100% -190%;
+				    -ms-transform-origin: 100% -190%;
+				    -o-transform-origin: 100% -190%;*/
 
 				    /* Text Position */
 				    #left_t{
 						position: absolute;
-					    top:34%;
-					    left:22%;
+					    /*top:34%;left:22%;*/
+					    bottom: 53%;
+    					right: 18%;
 					    -moz-transform: skew(-30deg) rotate(-155deg);
 					    -webkit-transform: skew(-30deg) rotate(-155deg);
 					    -ms-transform: skew(-30deg) rotate(-155deg);
@@ -255,8 +264,9 @@ $beepGrayLight: #323232;
 				    /* Text Position */
 				    #right_t{
 						position: absolute;
-					    top:30%;
-					    left:27%;
+					    /*top:30%;left:27%;*/
+					    right: 30%;
+    					top: 40%;
 					    transform: skew(30deg) rotate(150deg);
 					    -moz-transform: skew(30deg) rotate(150deg);
 					    -webkit-transform: skew(30deg) rotate(150deg);
@@ -264,9 +274,6 @@ $beepGrayLight: #323232;
 					    -o-transform: skew(30deg) rotate(150deg);
 					}
 				}
-
-				
-
 			}
 		}
 

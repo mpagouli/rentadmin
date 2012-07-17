@@ -44,16 +44,16 @@ $(document).ready(function() {
 	    // Go To Appropriate Page
 	    switch(mselected){
 	    	case 1:
-	    		alert('Go to Dash Board');
+	    		alert('Go to Dashboard');
 	    		break;
 	    	case 2:
-	    		alert('Go to Watcher');
+	    		alert('Go to Administration');
 	    		break;
 	    	case 3:
-	    		alert('Go to Settings');
+	    		alert('Go to Operation');
 	    		break;
 	    	default:
-	    		alert('Default: Go to Settings');
+	    		alert('Default: Go to Operation');
 	    }
 
     });

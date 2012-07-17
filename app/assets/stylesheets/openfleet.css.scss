@@ -81,6 +81,7 @@ p {
 
 
 
+
 /* Header - Navigation Bar */
 
 #logo {
@@ -129,7 +130,17 @@ footer {
 /* Sign in Page */
 
 #signin{
-  margin-top:30px
+  margin-top:30px;
+  .well{
+    padding: 10px 38px;
+  }
+  div.centered{
+    text-align:center;
+    padding-top:10px;
+  }
+  /*form{
+    margin: 0px;
+  }*/
 }
 
 

@@ -1,14 +1,15 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <%= link_to '#', id: "logo", :class => 'brand' do %>
-        <%= image_tag("wheel.ico", :alt => "Open Fleet", :width => "40px", :height => "40px") %>
-        <span>Open Fleet</span>
-      <% end %>
-        
+
+      <%= render 'shared/app_logo' %>
+      
       <ul class="nav pull-right">
         <li> <%= link_to "Help", help_path %> </li>
-      </div>
+        <% if current_user  %>
+            <%= render 'shared/user_options' %>
+        <% end %>
+      </ul>
     </div>
   </div>
 </header>

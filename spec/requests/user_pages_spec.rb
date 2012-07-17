@@ -27,6 +27,7 @@ describe "UserPages" do
       context "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         before do
+          sign_out user
           sign_in admin
           visit users_path
         end
