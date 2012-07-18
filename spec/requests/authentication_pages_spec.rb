@@ -4,18 +4,19 @@ describe "AuthenticationPages" do
   
   subject { page }
 
+  #AUTHENTICATION
   describe "Sign In Page" do
   	before { visit signin_path }
-  	it { should have_selector('title', text:'Open Fleet | Sign in') }
+  	it { should have_selector('title', text: full_title('Sign in')) }
   	it { should have_selector('h2', text: 'Sign in') }
     it { should have_link('Help', href: help_path) }
-    it { should_not have_link('Admin', href: '#') }
-    it { should_not have_link('Board', href: '#') }
-    it { should_not have_link('Operation', href: '#') }
+    it { should_not have_link('Admin', href: admin_path) }
+    it { should_not have_link('Board', href: board_path) }
+    it { should_not have_link('Operation', href: operation_path) }
     it { should_not have_link('Sign out', href: signout_path) }
   	context "with invalid information" do 
   		before { click_button "Sign in" }
-  		it { should have_selector('title', text:'Sign in') }
+  		it { should have_selector('title', text: full_title('Sign in')) }
   		it { should have_selector('div.alert.alert-error', text:'Invalid') }
   		context "after visiting another page" do
   			before { click_link "Help" }
@@ -31,7 +32,7 @@ describe "AuthenticationPages" do
       #it { should have_link('Settings', href: edit_user_path(user)) }
   		#it { should have_link('Sign out', href: signout_path) }
   		it { should_not have_button('Sign in') }
-      it { should have_selector('title', text: 'Open Fleet') }
+      it { should have_selector('title', text: full_title('')) }
       it { should have_selector('div', id: 'wheelmenu') }
       it { should have_link('Sign out', href: signout_path) }
   		context "followed by signout" do
@@ -41,19 +42,41 @@ describe "AuthenticationPages" do
   	end
   end
 
+  #AUTHORIZATION
   describe "Authorization" do
     context "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
       context "in the Static Pages controller" do
         describe "visiting home page" do
           before { visit home_path }
-          it { should have_selector('title', text: 'Open Fleet | Sign in') }
+          it { should have_selector('title', text: full_title('Sign in')) }
+        end
+        describe "visiting help page and clicking home" do
+          before do 
+            visit help_path 
+            click_link "Open Fleet"
+          end
+          it { should have_selector('title', text: full_title('Sign in')) }
+        end
+      end
+      context "in the Menu Pages controller" do
+        describe "visiting operation page" do
+          before { visit operation_path }
+          it { should have_selector('title', text: full_title('Sign in')) }
+        end
+        describe "visiting board page" do
+          before { visit board_path }
+          it { should have_selector('title', text: full_title('Sign in')) }
+        end
+        describe "visiting admin page" do
+          before { visit admin_path }
+          it { should have_selector('title', text: full_title('Sign in')) }
         end
       end
       context "in the Users controller" do
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
-          it { should have_selector('title', text: 'Open Fleet | Sign in') }
+          it { should have_selector('title', text: full_title('Sign in')) }
         end
         describe "submitting to the update action" do
           before { put user_path(user) }
@@ -61,7 +84,7 @@ describe "AuthenticationPages" do
         end
         describe "visiting the user index" do
           before { visit users_path }
-          it { should have_selector('title', text: 'Open Fleet | Sign in') }
+          it { should have_selector('title', text: full_title('Sign in')) }
         end
       end
       context "when attempting to visit a protected page" do
@@ -73,7 +96,7 @@ describe "AuthenticationPages" do
         end
         describe "after signing in" do
           it "should render the desired protected page" do
-            page.should have_selector('title', text: 'Edit User')
+            page.should have_selector('title', text: full_title('Edit User'))
           end
         end
       end
@@ -84,7 +107,7 @@ describe "AuthenticationPages" do
       before { sign_in user }
       describe "visiting Users#edit page" do
         before { visit edit_user_path(wrong_user) }
-        it { should_not have_selector('title', text: 'Edit User') }
+        it { should_not have_selector('title', text: full_title('Edit User')) }
       end
       describe "submitting a PUT request to the Users#update action" do
         before { put user_path(wrong_user) }
@@ -98,6 +121,12 @@ describe "AuthenticationPages" do
       context "in the Users controller" do
         describe "submitting a DELETE request to the Users#destroy action" do
           before { delete user_path(user) }
+          specify { response.should redirect_to(root_path) }        
+        end
+      end
+      context "in the Menu Pages controller" do
+        describe "visiting admin page" do
+          before { get admin_path }
           specify { response.should redirect_to(root_path) }        
         end
       end

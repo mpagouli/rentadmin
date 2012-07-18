@@ -1,5 +1,7 @@
 Rentadmin::Application.routes.draw do
 
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -76,7 +78,13 @@ Rentadmin::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   match '/home', to: 'static_pages#home'
   match '/help', to: 'static_pages#help'
+
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  
+  match '/admin', to: 'menu_pages#admin'
+  match '/operation', to: 'menu_pages#operation'
+  match '/board', to: 'menu_pages#board'
+
 end

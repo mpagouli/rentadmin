@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
 		if current_user
 			redirect_to home_path
 		end
+		# Signin page should contain a "Help" link with specific href
+		@help_href = help_path
 	end
 	
 	def create

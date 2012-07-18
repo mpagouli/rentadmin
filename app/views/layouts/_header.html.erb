@@ -2,14 +2,28 @@
   <div class="navbar-inner">
     <div class="container-fluid">
 
-      <%= render 'shared/app_logo' %>
-      
-      <ul class="nav pull-right">
-        <li> <%= link_to "Help", help_path %> </li>
-        <% if current_user  %>
-            <%= render 'shared/user_options' %>
+      <%= render 'shared/nav/app_logo' %>
+      <div class="nav-collapse">
+        
+        <% if menu_selected %> 
+          <ul id="menu" class="nav">
+            <% case menu_selected 
+              when 'operation' %>
+                <%= render 'shared/nav/operation_menu' %> 
+              <% when 'admin' %>
+                <%= render 'shared/nav/admin_menu' %>
+            <% end %>
+          </ul>
         <% end %>
-      </ul>
+        <ul id="right_items" class="nav pull-right">
+          <%= render 'shared/nav/help_item', pth:@help_href %>
+          <% if current_user  %>
+              <%= render 'shared/nav/user_options' %>
+          <% end %>
+        </ul>
+
+      </div>
+
     </div>
   </div>
 </header>

@@ -1,0 +1,13 @@
+<% if pth == nil %>
+  <li>
+  	<%= link_to :back do %>
+  		<i class="icon-chevron-left icon-white"></i> Back
+  	<% end %>
+  </li>
+<% else %>
+  <li> 
+	<%= link_to pth do %>
+	  <i class="icon-flag icon-white"></i> Help
+	<% end %>
+  </li>         
+<% end %>

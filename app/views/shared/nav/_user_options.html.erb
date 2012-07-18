@@ -9,10 +9,23 @@
         <i class="icon-home"></i> Home
       <% end %>
     </li>
-    <li><%= link_to "Operation", operation_path %></li>
-    <li><%= link_to "Board", board_path %></li>
+    <li>
+      <%= link_to operation_path do %>
+        <i class="icon-wrench"></i> Operation
+      <% end %>
+    </li>
+    <li>
+      <%= link_to board_path do %>
+        <i class="icon-wrench"></i> Board
+      <% end %>
+    </li>
+
     <% if current_user.admin? %>
-      <li><%= link_to "Administration", admin_path %></li>
+      <li>
+        <%= link_to admin_path do %>
+          <i class="icon-wrench"></i> Administration
+        <% end %>
+      </li>
     <% end %>
     <li class="divider"></li>
     <li>

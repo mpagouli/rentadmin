@@ -12,7 +12,7 @@ describe "UserPages" do
       sign_in user
       visit users_path
     end
-    it { should have_selector('title', text: 'All users') }
+    it { should have_selector('title', text: full_title('All users')) }
     it { should have_selector('h1', text: 'All users') }
     describe "pagination" do
       it { should have_selector('div.pagination') }
@@ -102,7 +102,7 @@ describe "UserPages" do
     end
     context "Page" do
       it { should have_selector('h1', text: 'Edit User') }
-      it { should have_selector('title', text: 'Edit User') }
+      it { should have_selector('title', text: full_title('Edit User')) }
     end
     context "with invalid information" do
       before { click_button "Save changes" }

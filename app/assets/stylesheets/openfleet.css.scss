@@ -6,6 +6,7 @@
 
 $grayMediumLight: #eaeaea;
 $backgroundCol: #d4d7fe;
+$logoCol: #5e9dc8;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -77,6 +78,9 @@ p {
 /*.container{
   margin:auto 1%;
   width:98%;
+}
+.icon-flag {
+  margin-right: 5px;
 }*/
 
 
@@ -84,16 +88,36 @@ p {
 
 /* Header - Navigation Bar */
 
-#logo {
-  line-height: 1;
-  font-weight: bold;
-  img{
-    vertical-align:middle;
+header{
+  #logo {
+    line-height: 1;
+    font-weight: bold;
+    color: $logoCol;
+    margin-right: 20px;
+    img{
+      vertical-align:middle;
+    }
+    &:hover {
+      /*color: white;*/
+      text-decoration: none;
+    }
   }
-  &:hover {
-    color: white;
-    text-decoration: none;
+  .nav-collapse {
+    #menu{
+      font-size: 18px;
+      padding-top: 8px;
+      li a {
+        color: $white;
+      }
+    }
   }
+  #right_items{
+      padding-top: 8px;
+      li a {
+        color: $logoCol;
+      }
+    }
+  
 }
 
 

@@ -1,8 +1,8 @@
 <%= form_for(:session, url: sessions_path) do |f| %>
   <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= f.text_field :email, :value => "epediaditi@example.com" %>
   <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password, :value => "foobar" %>
   <div class="centered">
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
   </div>
