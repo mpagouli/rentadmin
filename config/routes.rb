@@ -1,7 +1,5 @@
 Rentadmin::Application.routes.draw do
 
-  
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -86,5 +84,7 @@ Rentadmin::Application.routes.draw do
   match '/admin', to: 'menu_pages#admin'
   match '/operation', to: 'menu_pages#operation'
   match '/board', to: 'menu_pages#board'
+
+  match '/vehicles_home', to: 'vehicles#vehicles_home'
 
 end

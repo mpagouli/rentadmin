@@ -16,6 +16,7 @@
           </ul>
         <% end %>
         <ul id="right_items" class="nav pull-right">
+          <li class="divider-vertical"></li>
           <%= render 'shared/nav/help_item', pth:@help_href %>
           <% if current_user  %>
               <%= render 'shared/nav/user_options' %>

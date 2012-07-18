@@ -11,4 +11,5 @@ class StaticPagesController < ApplicationController
   	# Help page should not contain a "Help" link
   	@help_href = nil
   end
+  
 end

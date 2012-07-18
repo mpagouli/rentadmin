@@ -1,0 +1,18 @@
+<li <%= selected_vehicle? ? 'id=item_selected' : '' %>  class="dropdown"> 
+  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+    Vehicles <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li <%= selected_item?('new') ? 'id=sub_selected' : '' %> >
+      <%= link_to new_vehicle_path do %>
+        New
+      <% end %>
+    </li>
+    <li class="divider"></li>
+    <li <%= selected_item?('list') ? 'id=sub_selected' : '' %> >
+      <%= link_to vehicles_path do %>
+        List
+      <% end %>
+    </li>
+  </ul>
+</li>

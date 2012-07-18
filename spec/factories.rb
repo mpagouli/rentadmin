@@ -10,4 +10,27 @@ FactoryGirl.define do
       admin true
     end
   end
+
+  factory :make do
+    sequence(:make_name)  { |n| "Make#{n}" }
+    sequence(:description) { |n| "Description#{n}"}
+  end
+
+  factory :group do
+    sequence(:group_name)  { |n| "Group#{n}" }
+    sequence(:description) { |n| "Description#{n}"}
+  end
+
+  factory :model do
+    sequence(:model_name)  { |n| "Model#{n}" }
+    sequence(:description) { |n| "Description#{n}"}
+    make
+    group
+  end
+
+  factory :vehicle do
+    sequence(:reg_no) { |n| "#{n}" }
+    model
+  end 
+
 end

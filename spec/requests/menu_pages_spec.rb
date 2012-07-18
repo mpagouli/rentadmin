@@ -66,9 +66,23 @@ describe "MenuPages" do
     	it { should have_link "Home", href: home_path }
     	it { should have_link "Sign out", href: signout_path }
     end
+    describe "Vehicles Dropdown links:" do
+      it { should have_link "New", href: new_vehicle_path }
+      it { should have_link "List", href: vehicles_path }
+      describe "Vehicles => New" do
+        before { click_link "New" }
+        it { should have_selector('title', text: 'New Vehicle')}
+      end
+      describe "Vehicles => List" do
+        before { click_link "List" }
+        it { should have_selector('title', text: 'Vehicles')}
+      end
+    end
     describe "Content" do
 
     end
+    
+
   end
 
 end

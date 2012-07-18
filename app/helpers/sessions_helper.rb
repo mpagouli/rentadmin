@@ -1,5 +1,7 @@
 module SessionsHelper
 
+  include MenuPagesHelper
+
 	def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     self.current_user = user
@@ -27,6 +29,7 @@ module SessionsHelper
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
+    unselect_menu if menu_selected?
   end
 
   def current_user?(user)

@@ -21,3 +21,22 @@ def full_title(page_title)
     "#{base_title} | #{page_title}"
   end
 end
+
+def select_menu(user, menu)
+  sign_in user
+  if user.admin?
+    if menu == 'admin'
+      click_link "Administration"
+    else 
+      click_link menu.capitalize
+    end
+  end
+  # when not using Capybara as well.
+  session[:menu_selected] = menu
+end
+
+def unselect_menu(user)
+  sign_out user
+  # when not using Capybara as well.
+  session.delete(:menu_selected)
+end
