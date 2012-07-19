@@ -5,13 +5,13 @@
   <ul class="dropdown-menu">
     <li <%= selected_item?('new') ? 'id=sub_selected' : '' %> >
       <%= link_to new_vehicle_path do %>
-        New
+        New Vehicle
       <% end %>
     </li>
     <li class="divider"></li>
     <li <%= selected_item?('list') ? 'id=sub_selected' : '' %> >
       <%= link_to vehicles_path do %>
-        List
+        Vehicle List
       <% end %>
     </li>
   </ul>

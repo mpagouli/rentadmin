@@ -27,9 +27,11 @@ module SessionsHelper
   end
 
   def sign_out
-    self.current_user = nil
-    cookies.delete(:remember_token)
-    unselect_menu if menu_selected?
+    if current_user
+      self.current_user = nil
+      cookies.delete(:remember_token)
+      unselect_menu if menu_selected?
+    end
   end
 
   def current_user?(user)

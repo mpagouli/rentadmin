@@ -26,9 +26,9 @@ describe "StaticPages" do
     it { should have_link('Home', href: home_path) }
     it { should have_link('Board', href: board_path) }
     it { should have_link('Operation', href: operation_path) }
-    it { should have_selector('div', id: 'wheelmenu') }
+    it { should have_selector('div#wheelmenu') }
     context ": visit as simple user" do
-      it { should_not have_link('Admin', href: admin_path) }
+      it { should_not have_link('Administration', href: admin_path) }
     end
     context ": visit as administrator" do
       let(:admin) { FactoryGirl.create(:admin) }
@@ -36,7 +36,7 @@ describe "StaticPages" do
         sign_out user
         sign_in admin
       end
-      it { should have_link('Admin', href: admin_path) }
+      it { should have_link('Administration', href: admin_path) }
       context "clicking on Administration Link" do
         before { click_link "Administration" }
         it { should have_selector('title', text: full_title('Admin')) }
@@ -58,7 +58,7 @@ describe "StaticPages" do
       end
       describe "Home" do
         before { click_link "Home" }
-        it { should have_selector('div', id: 'wheelmenu') }
+        it { should have_selector('div#wheelmenu') }
       end
       describe "Operation" do
         before { click_link "Operation" }
@@ -118,7 +118,7 @@ describe "StaticPages" do
         it { should have_link "Back" }
         describe "should redirect to home page" do
           before { click_link "Back" }
-          it { should have_selector('div', id: 'wheelmenu') }
+          it { should have_selector('div#wheelmenu') }
         end
       end
     end

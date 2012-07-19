@@ -11,7 +11,7 @@ end
 
 def make_groups
   5.times do |n|
-    name  = Faker::Name.name
+    name  = "group#{n+1}"
     description = "group#{n+1}"
     Group.create!(group_name: name, description: description)
   end
@@ -19,7 +19,7 @@ end
 
 def make_makes
   5.times do |n|
-    name  = Faker::Name.name
+    name  = "make#{n+1}"
     description = "make#{n+1}"
     Make.create!(make_name: name, description: description)
   end
@@ -28,29 +28,35 @@ end
 def make_models
   groups = Group.all(limit: 4)
   makes = Make.all(limit: 4)
-  7.times do |n|
-    group_index = 0
-    name = 'model#{n+1}'
-    description = "model#{n+1}"
-    makes.each do |make| 
+  group_index = 0
+  makes.each do |make| 
+    7.times do |n|
+      name = "model#{groups[group_index].id}_#{n+1}"
+      description = "model#{groups[group_index].id}_#{n+1}"
       mod = make.models.create!(model_name: name, description: description) 
       groups[group_index].models << mod
-      group_index += 1
     end
+    group_index += 1
   end
 end
 
 def make_vehicles
   models = Model.all(limit: 5)
   models[0..2].each do |model|
-    3.times do |n|
-      reg_no = Faker::Lorem.sentence(5) 
+    20.times do |n|
+      reg_no = rand(12**12)
+      while reg_no.to_s.length != 12
+        reg_no =rand(13**13) 
+      end
       model.vehicles.create!(reg_no: reg_no)   
     end
   end
   models[3..4].each do |model|
-    2.times do |n|
-      reg_no = rand(12)
+    20.times do |n|
+      reg_no = rand(12**12)
+      while reg_no.to_s.length != 12
+        reg_no =rand(13**13) 
+      end
       model.vehicles.create!(reg_no: reg_no)   
     end
   end

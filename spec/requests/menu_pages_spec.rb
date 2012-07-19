@@ -61,21 +61,24 @@ describe "MenuPages" do
     	it { should have_link "Groups", href: '#' }
     	it { should have_link "Vehicles", href: '#' }
     	it { should have_link "Customers", href: '#' }
+      it { should have_link "Users", href: users_path }
     	it { should have_link "Rates", href: '#' }
     	it { should have_link "Help", href: '#' }
     	it { should have_link "Home", href: home_path }
     	it { should have_link "Sign out", href: signout_path }
     end
     describe "Vehicles Dropdown links:" do
-      it { should have_link "New", href: new_vehicle_path }
-      it { should have_link "List", href: vehicles_path }
+      it { should have_link "New Vehicle", href: new_vehicle_path }
+      it { should have_link "Vehicle List", href: vehicles_path }
       describe "Vehicles => New" do
-        before { click_link "New" }
+        before { click_link "New Vehicle" }
         it { should have_selector('title', text: 'New Vehicle')}
+        it { should have_link "New Vehicle", href: new_vehicle_path }
       end
       describe "Vehicles => List" do
-        before { click_link "List" }
+        before { click_link "Vehicle List" }
         it { should have_selector('title', text: 'Vehicles')}
+        it { should have_link("Vehicle List", href: vehicles_path)}
       end
     end
     describe "Content" do

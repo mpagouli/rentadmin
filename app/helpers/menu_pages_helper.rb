@@ -36,6 +36,7 @@ module MenuPagesHelper
     self.menu_selected = nil
     #session.data.delete :menu_selected
     session.delete(:menu_selected)
+    unselect_item if item_selected?
   end
   def unselect_item
     self.item_selected = nil
@@ -52,6 +53,10 @@ module MenuPagesHelper
   def selected_vehicle?
     vehicle_items = ['new','list']
     vehicle_items.include?(item_selected)
+  end
+
+  def select_admin_menu
+    select_menu('admin') unless menu_selected?
   end
 
 end

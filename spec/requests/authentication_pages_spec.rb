@@ -10,7 +10,7 @@ describe "AuthenticationPages" do
   	it { should have_selector('title', text: full_title('Sign in')) }
   	it { should have_selector('h2', text: 'Sign in') }
     it { should have_link('Help', href: help_path) }
-    it { should_not have_link('Admin', href: admin_path) }
+    it { should_not have_link('Administration', href: admin_path) }
     it { should_not have_link('Board', href: board_path) }
     it { should_not have_link('Operation', href: operation_path) }
     it { should_not have_link('Sign out', href: signout_path) }
@@ -33,7 +33,7 @@ describe "AuthenticationPages" do
   		#it { should have_link('Sign out', href: signout_path) }
   		it { should_not have_button('Sign in') }
       it { should have_selector('title', text: full_title('')) }
-      it { should have_selector('div', id: 'wheelmenu') }
+      it { should have_selector('div#wheelmenu') }
       it { should have_link('Sign out', href: signout_path) }
   		context "followed by signout" do
         before { click_link "Sign out" }

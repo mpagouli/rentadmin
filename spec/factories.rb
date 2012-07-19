@@ -12,17 +12,17 @@ FactoryGirl.define do
   end
 
   factory :make do
-    sequence(:make_name)  { |n| "Make#{n}" }
-    sequence(:description) { |n| "Description#{n}"}
+    sequence(:make_name)  { |n| "Test Make#{n}" }
+    sequence(:description) { |n| "Test Description#{n}"}
   end
 
   factory :group do
-    sequence(:group_name)  { |n| "Group#{n}" }
+    sequence(:group_name)  { |n| "Test Group#{n}" }
     sequence(:description) { |n| "Description#{n}"}
   end
 
   factory :model do
-    sequence(:model_name)  { |n| "Model#{n}" }
+    sequence(:model_name)  { |n| "Test Model#{n}" }
     sequence(:description) { |n| "Description#{n}"}
     make
     group
