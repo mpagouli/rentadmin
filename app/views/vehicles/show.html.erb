@@ -1,7 +1,11 @@
 <% provide(:title, @vehicle.reg_no) %>
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-<%= @vehicle.model.model_name %>
-<%= @vehicle.model.make.make_name %>
-<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
+<div class="main-content">
+	<h2><%= yield(:title) %></h2>
+	<div class="row">
+		<%= render 'shared/flash_messages' %>
+		<%= @vehicle.model.model_name %>
+		<%= @vehicle.model.make.make_name %><br/>
+		<%= link_to "edit", edit_vehicle_path(@vehicle) %> | 
+		<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
+	</div>
+</div>

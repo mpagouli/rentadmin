@@ -60,6 +60,7 @@ describe "MenuPages" do
     	it { should have_link "General", href: '#' }
     	it { should have_link "Groups", href: '#' }
     	it { should have_link "Vehicles", href: '#' }
+      #it { should have_link "Models", href: '#' }
     	it { should have_link "Customers", href: '#' }
       it { should have_link "Users", href: users_path }
     	it { should have_link "Rates", href: '#' }

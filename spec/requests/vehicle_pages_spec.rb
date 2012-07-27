@@ -17,13 +17,13 @@ describe "VehiclePages" do
       visit admin_path
       visit vehicles_path
     end
-    describe "title and links" do 
+    describe "page" do 
       it { should have_link('Vehicle List') }
       it { should have_selector('title', text: full_title('Vehicles')) }
       it { should have_link('Help', href: '#' ) }
       it { should have_link('Sign out', href: signout_path ) }
     end
-    describe "Vehicles" do
+    describe "List" do
       before do  
         31.times { FactoryGirl.create(:vehicle, model: model) }
         visit admin_path
@@ -41,7 +41,7 @@ describe "VehiclePages" do
         it { should have_selector('div.pagination') }
         it ": should list each vehicle" do
           Vehicle.paginate(page: 1).each do |vehicle|
-            page.should have_selector('li', text: "#{vehicle.model.make.make_name}_#{vehicle.model.model_name}")
+            page.should have_selector('div', text: "#{vehicle.reg_no}")
           end
         end
       end
@@ -79,6 +79,8 @@ describe "VehiclePages" do
       end
     end
     #debugger
+    it { should have_selector('a#add_make') }
+    it { should have_selector('a#add_model') }
     it { should have_selector('select#make_id') }
     it { should have_selector('select#model_id') }
     context "submit with valid information", :js => true do
@@ -218,6 +220,39 @@ describe "VehiclePages" do
         it { should have_selector('div.alert.alert-success') }
         it { should have_xpath("//title[contains(text(), '#{full_title(vehicle.reg_no)}')]")  }
         specify { vehicle.reload.model == another_model }
+      end
+    end
+  end
+
+  #VEHICLES SHOW PAGE
+  describe "Show" do
+    let(:vehicle) { FactoryGirl.create(:vehicle, model: model) }
+    before do
+        group.save
+        make.save
+        model.save
+        vehicle.save
+        sign_in admin
+        visit admin_path
+    end
+    after do
+      Make.delete_all
+      Group.delete_all
+      Model.delete_all
+      Vehicle.delete_all
+    end
+    context "from Vehicles index page" do
+      before do 
+        visit vehicles_path
+        click_link 'show'
+      end
+      context "Page" do
+        it { should have_selector('h2', text: vehicle.reg_no) }
+        it { should have_selector('title', text: full_title(vehicle.reg_no)) }
+        it { should have_content(vehicle.model.model_name) }
+        it { should have_content(vehicle.model.make.make_name) }
+        it { should have_link("delete") }
+        it { should have_link("edit") }
       end
     end
   end

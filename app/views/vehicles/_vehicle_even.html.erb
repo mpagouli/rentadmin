@@ -1,16 +1,23 @@
 <% vehicles.each do |vehicle| %>
 <li>
   <div class="vehicle-options">
-    <%= link_to "#{vehicle.id} #{vehicle.model.make.make_name}_#{vehicle.model.model_name}", vehicle %><br/>
-     <%= link_to "show", vehicle %>
-    | <%= link_to "edit", edit_vehicle_path(vehicle) %>
-    | <%= link_to "delete", vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
+    <ul class="unstyled">
+      <li><div><label>Plate:</label> <%= vehicle.reg_no %> </div></li>
+      <li><div><label>Model:</label> <%= vehicle.model.model_name %> </div></li>
+      <li><div><label>Make:</label> <%= vehicle.model.make.make_name %> </div></li> 
+    </ul>
   </div>
-  <div class="vehicle-image">
+  <div class="model-index-image">
+    <%= "#{vehicle.id}." %> <%= link_to "#{vehicle.reg_no}", vehicle %>
     <%= image_tag("vehicles/example-vehicle.jpg", 
-      :alt => "#{vehicle.model.make.make_name}_#{vehicle.model.model_name}", 
-      :width => "200px") 
+      :alt => "#{vehicle.reg_no}", 
+      :width => "100%") 
     %>
+    <div>
+      <%= link_to "show", vehicle %>
+      | <%= link_to "edit", edit_vehicle_path(vehicle) %>
+      | <%= link_to "delete", vehicle, method: :delete, data: { confirm: "Are you sure?" }  %>
+    </div>
   </div>
 </li>
 <% end %>

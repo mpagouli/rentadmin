@@ -1,33 +1,47 @@
+<%= render 'new_make', make: Make.new %>
+<%= render 'new_model', make: Model.new %>
+
 <%= render 'shared/error_messages', object: vehicle %>
-
 <div class="row">
-<div class="span11">
+	<div class="span11">
 
-<div class="inline">
-<%= label_tag "make", 'Make' %>
-<%= if act == 'new'
-		select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
-	else
-		select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
-	end %>
-</div>
-<div class="inline <%= act=='new'? 'control-group warning':'' %>">
-<%= label_tag "model", 'Model' %>
-<%= if act == 'new'
-		select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true }) 
-	else
-		select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 
-	end%>
-	<label><%= act=='new'? 'Select make to filter models list':'' %></label>
-</div>
-<div class="right">
-<%= label_tag "reg_no", 'License plate number' %>
-<%= if act == 'new'
-		text_field_tag 'reg_no', nil, :placeholder => 'Enter licenseplate number...'
-	else 
-		text_field_tag 'reg_no', vehicle.reg_no, :readonly => true 
-	end %>
+		<div class="inline">
+		
+		<%= label_tag "make" do %>
+			<%= link_to '#', :class => 'add_make' do %>
+				<i class="icon-plus-sign"></i>
+			<% end %> Make
+		<% end %>
+		<%= if act == 'new'
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
+			else
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
+			end %>
+		</div>
+
+		<div class="inline <%= act=='new'? 'control-group warning':'' %>">
+		<%= label_tag "model" do %>
+			<%= link_to new_model_path, :class => 'add_model', :hidden => true, :remote => true, do %>
+				<i class="icon-plus-sign"></i>
+			<% end %> Model
+		<% end %>
+		<%= if act == 'new'
+				select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true })
+			else
+				select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 
+				
+			end %>
+			<label><%= act=='new'? 'Select make to filter models list':'' %></label>
+		</div>
+		<div class="right">
+		<%= label_tag "reg_no", 'License plate number' %>
+		<%= if act == 'new'
+				text_field_tag 'reg_no', nil, :placeholder => 'Enter licenseplate number...'
+			else 
+				text_field_tag 'reg_no', vehicle.reg_no, :readonly => true 
+			end %>
+		</div>
+
+	</div>
 </div>
 
-</div>
-</div>

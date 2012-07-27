@@ -132,6 +132,8 @@ header{
         }
       }
       #item_selected {
+          #background-color: $navBarCol;
+          color: lightBlue;
           #sub_selected a{
             background-color: $menuDropdownCol;
             color: lightBlue;
@@ -176,14 +178,6 @@ header{
   div.inline { 
     float:left; 
     margin-right:10px;
-    &.odd{
-      width:45%;
-      border-right: 1px solid $grayLighter;
-    }
-    &.even{
-      width:45%;
-      border-left: 1px solid $grayLighter;
-    }
   }
   div.clearBoth { 
     clear:both; 
@@ -295,10 +289,70 @@ footer {
 
 /* Vehicles index */
 
-ul.vehicles {
-  list-style: none;
+div.vehicles{
+  
+  width:100%;
+  ul.vehicles {
+    list-style: none;
+    margin:0;
+    li {
+      overflow: auto;
+      padding: 10px 0;
+      border-top: 1px solid $grayLighter;
+      &:last-child {
+        border-bottom: 1px solid $grayLighter;
+        margin-bottom:10px;
+      }
+    }
+    .vehicle-options{
+      float:left;
+      width:45%;
+      padding: 20px 2px;
+      ul.unstyled{
+        margin-left: 30px;
+        li{
+          padding: 1px;
+          border: 0;
+          &:last-child {
+            border: 0;
+            margin-bottom:0;
+          }
+          div {
+            clear:both;
+            label{
+              display: block;
+              float:left;
+              width:60px;
+              font-weight:bold;
+              margin-bottom:0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  div.odd{
+    width:50%;
+    float:left;
+    /*border-right: 1px solid $grayLighter;*/
+  }
+  div.even{
+    float:left;
+    width:50%;
+    /*border-left: 1px solid $grayLighter;*/
+  }
+}
+
+
+
+/* Models index */
+
+div.models {
   margin: 0;
-  li {
+  width:100%;
+  div.model {
+    width:50%;
+    float:left;
     overflow: auto;
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
@@ -307,14 +361,40 @@ ul.vehicles {
       margin-bottom:10px;
     }
   }
-  .vehicle-options{
+  .model-options{
     float:left;
-    width:40%;
-    padding:5px;
+    width:45%;
+    padding: 20px 2px;
+    ul.unstyled li{
+      &:last-child {
+        margin-top:6px;
+      }
+      textarea{
+        width:170px;
+        resize: none;
+      }
+      div {
+        clear:both;
+        label{
+          display: block;
+          float:left;
+          width:50px;
+          font-weight:bold;
+          margin-bottom:1px;
+        }
+      }
+    }
   }
-  .vehicle-image{
-    float:left;
-    width:50%;
-    padding:5px;
+}
+div.model-index-image{
+  float:left;
+  width:50%;
+  padding:5px;
+  font-size: 14px;
+  font-weight: bold;
+  div:last-child{
+    text-align:center;
+    font-weight:normal;
+    font-size:13px;
   }
 }

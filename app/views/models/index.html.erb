@@ -1,0 +1,16 @@
+<%= provide(:title,'Models') %>
+<div class="main-content pagination-center">
+	<div class="row">
+		<%= render 'shared/flash_messages' %>
+		<div class="span11">
+			<div class="right-button">
+				<%= button_to "New Model", :action => "new" %>
+			</div>
+			<%= will_paginate %>
+			<div class="models">
+			   	<%= render @models %>
+			</div>
+			<%= will_paginate %>
+		</div>
+	</div>
+</div>

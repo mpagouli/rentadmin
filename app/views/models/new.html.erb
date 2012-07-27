@@ -1,0 +1,19 @@
+<%= provide(:title,'New Model') %>
+<div class="main-content">
+	<div class="row">
+		<div class="span3">
+			
+		</div>
+		<div class="span8">
+			<%= form_tag "/models" do %>
+		  		<%= render 'modelform', model: @model, act: 'new' %>
+				<div class="center-button">
+					<%= submit_tag "Insert Model", class: "btn btn-large btn-primary" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		
+	</div>
+</div>

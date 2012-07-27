@@ -1,24 +1,27 @@
 <%= provide(:title,'Vehicles') %>
 <div class="main-content pagination-center">
 	<div class="row">
+		<%= render 'shared/flash_messages' %>
 		<div class="span11">
-	<div class="right-button">
-		<%= button_to "New Vehicle", :action => "new" %>
+			<div class="right-button">
+				<%= button_to "New Vehicle", :action => "new" %>
+			</div>
+			<%= will_paginate %>
+			<div class="vehicles">
+				<div class="odd">
+					<ul class="vehicles">
+						<%= render 'vehicle_odd', vehicles: @vehicles_odd %>
+				   		<%# render @vehicles_odd %>
+					</ul>
+				</div>
+				<div class="even">
+					<ul class="vehicles">
+						<%= render 'vehicle_even', vehicles: @vehicles_even %>
+				   		<%# render @vehicles_even %>
+					</ul>
+				</div>
+			</div>
+			<%= will_paginate %>
+		</div>
 	</div>
-	<%= will_paginate %>
-	<div class="inline odd">
-		<ul class="vehicles">
-			<%= render 'vehicle_odd', vehicles: @vehicles_odd %>
-	   		<%# render @vehicles_odd %>
-		</ul>
-	</div>
-	<div class="inline even">
-		<ul class="vehicles">
-			<%= render 'vehicle_even', vehicles: @vehicles_even %>
-	   		<%# render @vehicles_even %>
-		</ul>
-	</div>
-	<%= will_paginate %>
-</div>
-</div>
 </div>

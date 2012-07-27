@@ -1,0 +1,25 @@
+<div class="model">
+  <div class="model-index-image">
+    <%= "#{model.id}." %> <%= link_to "#{model.model_name}", model %>
+    <%= image_tag("vehicles/example-vehicle.jpg", 
+    	 :alt => "#{model.model_name}", 
+    	 :width => "100%") 
+    %>
+    <div>
+      <%= link_to "show", model %>
+      | <%= link_to "edit", edit_model_path(model) %>
+      | <%= link_to "delete", model, method: :delete, data: { confirm: "Are you sure?" }  %>
+    </div>
+  </div>
+  <div class="model-options">
+    <ul class="unstyled">
+      <li><div><label>Name:</label> <%= model.model_name %> </div></li>
+      <li><div><label>Make:</label> <%= model.make.make_name %> </div></li>
+      <% if model.description %>
+        <li><strong>Description:</strong> 
+            <textarea readonly="true" rows="3"><%= model.description %></textarea> 
+        </li>
+      <% end %> 
+    </ul>
+  </div>
+</div>

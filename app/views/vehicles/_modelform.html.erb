@@ -1,0 +1,14 @@
+<div id="error_explanation"></div>
+<div class="row">
+	<div class="span5">
+		<%= text_field_tag 'make_id', :hidden => true %>
+		<div class="inline">
+			<%= label_tag "model_name", 'Name' %>
+			<%= text_field_tag 'model_name', nil, :placeholder => 'Enter model name...' %>
+		</div>
+		<div class="inline">
+			<%= label_tag "description", 'Description' %>
+			<%= text_area_tag 'description', nil, :rows => 10, :cols => 25, :placeholder => 'Enter model description...', :escape => true %>
+		</div>
+	</div>
+</div>

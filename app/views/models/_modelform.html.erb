@@ -1,0 +1,56 @@
+<h2><%= yield(:title) %></h2>
+<%= render 'shared/error_messages', object: model %>
+
+<div class="row">
+	<div class="span6">
+		<div>
+		<%= label_tag "make", 'Make' %>
+		<%= if act == 'new'
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
+			else
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", model.make.id))
+			end %>
+		</div>
+		
+		<div>
+		<%= label_tag "name", 'Name' %>
+		<%= if act == 'new'
+				text_field_tag 'name', nil, :placeholder => 'Enter model name...'
+			else 
+				text_field_tag 'name', model.name
+			end %>
+		</div>
+	</div>
+	<div class="span2">
+		<div>
+		<%= label_tag "make", 'Make' %>
+		<%= if act == 'new'
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
+			else
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", model.make.id))
+			end %>
+		</div>
+		
+		<div>
+		<%= label_tag "name", 'Name' %>
+		<%= if act == 'new'
+				text_field_tag 'name', nil, :placeholder => 'Enter model name...'
+			else 
+				text_field_tag 'name', model.name
+			end %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span8">
+		<div>
+		<%= label_tag "description", 'Description' %>
+		<%= if act == 'new'
+				text_area_tag 'description', nil, :rows => 10, :cols => 25, :placeholder => 'Enter model description...', :escape => true
+			else 
+				text_area_tag 'description', model.description, :rows => 10, :cols => 25, :escape => true  
+			end %>
+		</div>
+
+	</div>
+</div>

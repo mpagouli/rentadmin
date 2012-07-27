@@ -37,6 +37,7 @@ Rentadmin::Application.routes.draw do
   end
   resources :models do
       resources :vehicles
+      resources :assets
   end
   resources :groups do
     resources :models
@@ -46,6 +47,9 @@ Rentadmin::Application.routes.draw do
   end
   resources :vehicles do
     resources :reservations
+  end
+  resources :asset_categories do
+    resources :assets
   end
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -86,5 +90,9 @@ Rentadmin::Application.routes.draw do
   match '/board', to: 'menu_pages#board'
 
   match '/filter_models', to: 'vehicles#filter_models'
+  match '/create_make', to: 'makes#create_make'
+  #match '/popup_new_make', to: 'makes#popup_new'
+  match '/savemake', to: 'makes#savemake'
+  match '/savemodel', to: 'models#savemodel'
 
 end

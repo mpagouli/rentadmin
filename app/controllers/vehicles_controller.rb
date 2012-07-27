@@ -5,7 +5,7 @@ class VehiclesController < ApplicationController
 	before_filter :select_admin_menu
 
 	def index
-		select_item('list')
+		select_item('vehicle_list')
 		@vehicles = Vehicle.paginate(page: params[:page])
 		@vehicles_odd = @vehicles.values_at(* @vehicles.each_index.select {|i| i.even?})
 		@vehicles_even = @vehicles.values_at(* @vehicles.each_index.select {|i| i.odd?})
@@ -13,7 +13,7 @@ class VehiclesController < ApplicationController
 	end
 
 	def new
-		select_item('new')
+		select_item('vehicle_new')
 		@vehicle = Vehicle.new
 		@help_href = '#'
 	end
@@ -66,7 +66,7 @@ class VehiclesController < ApplicationController
 		@models = Model.where("make_id = ?", params[:make_id])
 		 respond_to do |format|
         	format.json { render :json =>  @models }
-    	end
+    	 end
 	end
 
 end

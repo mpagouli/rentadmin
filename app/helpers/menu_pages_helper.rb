@@ -51,8 +51,12 @@ module MenuPagesHelper
     menu_item == item_selected
   end
   def selected_vehicle?
-    vehicle_items = ['new','list']
+    vehicle_items = ['vehicle_new','vehicle_list']
     vehicle_items.include?(item_selected)
+  end
+  def selected_models?
+    model_items = ['model_new','model_list']
+    model_items.include?(item_selected)
   end
 
   def select_admin_menu

@@ -1,0 +1,13 @@
+<div id="make_new_dialog" title="New Make">
+	<h2>New Make</h1>
+	<div class="row">
+	  <div class="span5">
+	    <%= form_tag "/makes" do %>
+	      <%= render 'makeform', make: make %>
+	      <div class="center-button">
+			<%= submit_tag "Insert Make", class: "btn btn-large btn-primary" %>
+		  </div>
+	    <% end %>
+	  </div>
+	</div>
+</div>
