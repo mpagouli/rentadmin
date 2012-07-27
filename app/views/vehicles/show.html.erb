@@ -1,0 +1,7 @@
+<% provide(:title, @vehicle.reg_no) %>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<%= @vehicle.model.model_name %>
+<%= @vehicle.model.make.make_name %>
+<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>

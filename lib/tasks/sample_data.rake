@@ -44,18 +44,20 @@ def make_vehicles
   models = Model.all(limit: 5)
   models[0..2].each do |model|
     20.times do |n|
-      reg_no = rand(12**12)
+      postfix = "AXV #{n} "
+      reg_no = postfix + rand(6**6).to_s
       while reg_no.to_s.length != 12
-        reg_no =rand(13**13) 
+        reg_no = postfix + rand(7**7).to_s 
       end
       model.vehicles.create!(reg_no: reg_no)   
     end
   end
   models[3..4].each do |model|
     20.times do |n|
-      reg_no = rand(12**12)
+      postfix = "AXZ #{n} "
+      reg_no = postfix + rand(6**6).to_s
       while reg_no.to_s.length != 12
-        reg_no =rand(13**13) 
+        reg_no = postfix + rand(7**7).to_s
       end
       model.vehicles.create!(reg_no: reg_no)   
     end

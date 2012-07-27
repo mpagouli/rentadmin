@@ -1,3 +1,4 @@
+<% vehicles.each do |vehicle| %>
 <li>
   <div class="vehicle-image">
     <%= image_tag("vehicles/example-vehicle.jpg", 
@@ -6,9 +7,10 @@
     %>
   </div>
   <div class="vehicle-options">
-    <%= link_to "#{vehicle.id} #{vehicle.model.make.make_name}_#{vehicle.model.model_name}", vehicle %>
-    | <%= link_to "show", vehicle %>
+    <%= link_to "#{vehicle.id} #{vehicle.model.make.make_name}_#{vehicle.model.model_name}", vehicle %><br/>
+    <%= link_to "show", vehicle %>
     | <%= link_to "edit", edit_vehicle_path(vehicle) %>
     | <%= link_to "delete", vehicle, method: :delete, data: { confirm: "Are you sure?" }  %>
   </div>
 </li>
+<% end %>

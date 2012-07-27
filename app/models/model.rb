@@ -21,8 +21,10 @@ class Model < ActiveRecord::Base
 
   belongs_to :make
   belongs_to :group
-  has_many :vehicles
+  has_many :vehicles, :dependent => :restrict
+  has_many :assets, :dependent => :restrict
   validates_associated :vehicles
+  validates_associated :assets
   validates :make, :presence => { :message => "Make is required" }
   #validates :group, :presence => true
   validates :model_name, :presence => { :message => "Model name is required" }, :uniqueness => { case_sensitive: false }

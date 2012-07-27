@@ -4,9 +4,15 @@
       The form contains <%= pluralize(object.errors.count, "error") %>.
     </div>
     <ul>
-    <% object.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
-    <% end %>
+      <% if object.is_a?(Vehicle)
+        object.errors.each_with_index do |msg,i| %>
+          <li>* <%= msg[1] %></li>
+        <% end
+      else
+        object.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %></li>
+        <% end
+      end %>
     </ul>
   </div>
 <% end %>

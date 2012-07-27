@@ -1,0 +1,12 @@
+<%= provide(:title,'Edit Vehicle') %>
+<div class="main-content">
+	<h2><%= @vehicle.reg_no %></h2>
+	<div class="row">
+	  	<%= form_tag "/vehicles/#{@vehicle.id}", :method => :put do %>
+	  		<%= render 'vehicleform', vehicle: @vehicle, act: 'edit' %>
+	  		<div class="center-button">
+	  			<%= submit_tag "Save Changes", class: "btn btn-large btn-primary" %>
+	  		</div>
+		<% end %>
+	</div>
+</div>

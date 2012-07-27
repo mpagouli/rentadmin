@@ -16,7 +16,7 @@ class Make < ActiveRecord::Base
   	make.make_name = make_name.downcase
   end
 
-  has_many :models
+  has_many :models, :dependent => :restrict
   validates_associated :models
   validates :make_name, :presence => { :message => "Make name is required" }, :uniqueness => { case_sensitive: false }
   validates :description, :length => {

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  if( $("#wheelmenu") !== 'undefined'){
+
     $("#wheelmenu").data('clicks_num',0);
 
 	$("#wheelmenu").click(function(e){
@@ -57,5 +59,7 @@ $(document).ready(function() {
 	    }
 
     });
+
+  }
 
 });

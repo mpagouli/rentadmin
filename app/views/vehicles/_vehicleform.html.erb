@@ -1,0 +1,33 @@
+<%= render 'shared/error_messages', object: vehicle %>
+
+<div class="row">
+<div class="span11">
+
+<div class="inline">
+<%= label_tag "make", 'Make' %>
+<%= if act == 'new'
+		select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
+	else
+		select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
+	end %>
+</div>
+<div class="inline <%= act=='new'? 'control-group warning':'' %>">
+<%= label_tag "model", 'Model' %>
+<%= if act == 'new'
+		select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true }) 
+	else
+		select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 
+	end%>
+	<label><%= act=='new'? 'Select make to filter models list':'' %></label>
+</div>
+<div class="right">
+<%= label_tag "reg_no", 'License plate number' %>
+<%= if act == 'new'
+		text_field_tag 'reg_no', nil, :placeholder => 'Enter licenseplate number...'
+	else 
+		text_field_tag 'reg_no', vehicle.reg_no, :readonly => true 
+	end %>
+</div>
+
+</div>
+</div>

@@ -1,1 +1,12 @@
 <%= provide(:title,'New Vehicle') %>
+<div class="main-content">
+	<h2><%= yield(:title) %></h2>
+	<div class="row">
+		<%= form_tag "/vehicles" do %>
+	  		<%= render 'vehicleform', vehicle: @vehicle, act: 'new' %>
+			<div class="center-button">
+				<%= submit_tag "Insert Vehicle", class: "btn btn-large btn-primary" %>
+			</div>
+		<% end %>
+	</div>
+</div>

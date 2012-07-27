@@ -9,6 +9,7 @@ $backgroundCol: #d4d7fe;
 $logoCol: #5e9dc8;
 $menuDividerCol: #5f6b61;
 $menuDropdownCol: #333333;
+$navBarCol: #2c2c2c;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -136,7 +137,7 @@ header{
             color: lightBlue;
           }
           .dropdown-toggle{
-            background-color: $menuDropdownCol;
+            #background-color: $navBarCol;
             color: lightBlue;
           }
         }
@@ -155,7 +156,52 @@ header{
 
 
 
-/* footer */
+/* Container */
+.container .main-content{
+  padding:20px;
+  background-color:$white;
+  .right-button{
+    text-align:right;
+  }
+  .center-button{
+    margin-top:40px;
+    text-align:center;
+  }
+  .row{
+    margin-left:0px;
+  }
+  [class*="span"]{
+    margin-left:20px;
+  }
+  div.inline { 
+    float:left; 
+    margin-right:10px;
+    &.odd{
+      width:45%;
+      border-right: 1px solid $grayLighter;
+    }
+    &.even{
+      width:45%;
+      border-left: 1px solid $grayLighter;
+    }
+  }
+  div.clearBoth { 
+    clear:both; 
+  }
+  div.right { 
+    float:right;
+  }
+}
+.pagination-center {
+  .pagination{
+    text-align: center;
+    clear:both;
+  }
+}
+
+
+
+/* Footer */
 
 footer {
   margin-top: 45px;
@@ -188,7 +234,7 @@ footer {
 
 #signin{
   margin-top:30px;
-  .well{
+  &.well{
     padding: 10px 38px;
   }
   div.centered{
@@ -249,7 +295,7 @@ footer {
 
 /* Vehicles index */
 
-.vehicles {
+ul.vehicles {
   list-style: none;
   margin: 0;
   li {
@@ -258,7 +304,17 @@ footer {
     border-top: 1px solid $grayLighter;
     &:last-child {
       border-bottom: 1px solid $grayLighter;
+      margin-bottom:10px;
     }
   }
+  .vehicle-options{
+    float:left;
+    width:40%;
+    padding:5px;
+  }
+  .vehicle-image{
+    float:left;
+    width:50%;
+    padding:5px;
+  }
 }
-

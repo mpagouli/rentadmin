@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716162358) do
+ActiveRecord::Schema.define(:version => 20120723132332) do
+
+  create_table "asset_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "asset_categories", ["name"], :name => "index_asset_categories_on_name", :unique => true
+
+  create_table "assets", :force => true do |t|
+    t.string   "filename"
+    t.string   "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "model_id"
+    t.integer  "asset_category_id"
+  end
+
+  add_index "assets", ["filename"], :name => "index_assets_on_filename", :unique => true
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -43,7 +63,6 @@ ActiveRecord::Schema.define(:version => 20120716162358) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.integer  "make_id"
-    t.integer  "model_id"
     t.integer  "group_id"
     t.string   "model_name"
     t.string   "description", :limit => 400

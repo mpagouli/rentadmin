@@ -4,7 +4,7 @@
 
       <%= render 'shared/nav/app_logo' %>
       <div class="nav-collapse">
-        <% if menu_selected %> 
+        <% if menu_selected && current_user %> 
           <ul id="menu" class="nav">
             <% case menu_selected 
               when 'operation' %>

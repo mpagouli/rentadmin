@@ -11,7 +11,7 @@
 
 class Group < ActiveRecord::Base
   attr_accessible :group_name, :description
-  has_many :models
+  has_many :models, :dependent => :restrict
   validates_associated :models
   validates :group_name, :presence => { :message => "Group name is required" }, :uniqueness => true
   validates :description, :length => {

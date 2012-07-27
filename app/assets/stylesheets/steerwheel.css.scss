@@ -212,21 +212,16 @@ $beepGrayLight: #323232;
 				    position: absolute;
 				    width: 64%;
 				    z-index: -1;
-				    transform: rotate(30deg) skew(30deg);
-				    -moz-transform: rotate(30deg) skew(30deg);
-				    -webkit-transform: rotate(30deg) skew(30deg);
-				    -ms-transform: rotate(30deg) skew(30deg);
-				    -o-transform: rotate(30deg) skew(30deg);
+				    transform: rotate(30deg) skewX(30deg);
+				    -moz-transform: rotate(30deg) skewX(30deg);
+				    -webkit-transform: rotate(30deg) skewX(30deg);
+				    -ms-transform: rotate(30deg) skewX(30deg);
+				    -o-transform: rotate(30deg) skewX(30deg);
 				    transform-origin: 54% 30%;
 				    -moz-transform-origin: 54% 30%;
 				    -webkit-transform-origin: 54% 30%;
 				    -ms-transform-origin: 54% 30%;
 				    -o-transform-origin: 54% 30%;
-				    /*transform-origin: 100% -190%;
-				    -moz-transform-origin: 100% -190%;
-				    -webkit-transform-origin: 100% -190%;
-				    -ms-transform-origin: 100% -190%;
-				    -o-transform-origin: 100% -190%;*/
 
 				    /* Text Position */
 				    #left_t{
@@ -234,10 +229,11 @@ $beepGrayLight: #323232;
 					    /*top:34%;left:22%;*/
 					    bottom: 53%;
     					right: 18%;
-					    -moz-transform: skew(-30deg) rotate(-155deg);
-					    -webkit-transform: skew(-30deg) rotate(-155deg);
-					    -ms-transform: skew(-30deg) rotate(-155deg);
-					    -o-transform: skew(-30deg) rotate(-155deg);
+    					transform: skewX(-30deg) rotate(-155deg);
+					    -moz-transform: skewX(-30deg) rotate(-155deg);
+					    -webkit-transform: skewX(-30deg) rotate(-155deg);
+					    -ms-transform: skewX(-30deg) rotate(-155deg);
+					    -o-transform: skewX(-30deg) rotate(-155deg);
 					}
 				}
 
@@ -250,11 +246,11 @@ $beepGrayLight: #323232;
 				    position: absolute;
 				    width: 64%;
 				    z-index: -1;
-				    transform: rotate(-30deg) skew(-30deg);
-				    -moz-transform: rotate(-30deg) skew(-30deg);
-				    -webkit-transform: rotate(-30deg) skew(-30deg);
-				    -ms-transform: rotate(-30deg) skew(-30deg);
-				    -o-transform: rotate(-30deg) skew(-30deg);
+				    transform: rotate(-30deg) skewX(-30deg);
+				    -moz-transform: rotate(-30deg) skewX(-30deg);
+				    -webkit-transform: rotate(-30deg) skewX(-30deg);
+				    -ms-transform: rotate(-30deg) skewX(-30deg);
+				    -o-transform: rotate(-30deg) skewX(-30deg);
 				    transform-origin: 38% 6%;
 				    -moz-transform-origin: 38% 6%;
 				    -webkit-transform-origin: 38% 6%;
@@ -267,11 +263,11 @@ $beepGrayLight: #323232;
 					    /*top:30%;left:27%;*/
 					    right: 30%;
     					top: 40%;
-					    transform: skew(30deg) rotate(150deg);
-					    -moz-transform: skew(30deg) rotate(150deg);
-					    -webkit-transform: skew(30deg) rotate(150deg);
-					    -ms-transform: skew(30deg) rotate(150deg);
-					    -o-transform: skew(30deg) rotate(150deg);
+					    transform: skewX(30deg) rotate(150deg);
+					    -moz-transform: skewX(30deg) rotate(150deg);
+					    -webkit-transform: skewX(30deg) rotate(150deg);
+					    -ms-transform: skewX(30deg) rotate(150deg);
+					    -o-transform: skewX(30deg) rotate(150deg);
 					}
 				}
 			}

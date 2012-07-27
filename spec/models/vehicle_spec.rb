@@ -29,7 +29,7 @@ describe Vehicle do
 
   describe "Model:" do
   	context "empty" do 
-  	   before { @vehicle.reg_no = "registration no"
+  	   before { @vehicle.reg_no = "AXB 1234"
   	   	        @vehicle.model = nil }
        it { should_not be_valid }
        describe "specific error message" do 
@@ -44,25 +44,43 @@ describe Vehicle do
        it { should_not be_valid }
        describe "specific error message" do 
          before { @vehicle.save }
-         specify { @vehicle.errors_on(:reg_no).should == ["Registration number is required"] }
+         specify { @vehicle.errors_on(:reg_no).should include("Plate number is required") }
        end
   	end
   	context "not empty" do 
-  	  before { @vehicle.reg_no = "registration no" }
+  	  before { @vehicle.reg_no = "AXB 1234" }
   	  it { should be_valid }
   	end
   	context "not unique" do 
-  		before { @vehicle_other = Vehicle.new(reg_no:"registration no")
+  		before { @vehicle_other = Vehicle.new(reg_no:"AXB 1234")
   			     @vehicle_other.model = @model
   			     @vehicle_other.save 
-  			 	 @vehicle.reg_no = "registration no"
+  			 	 @vehicle.reg_no = "AXB 1234"
   			     @vehicle.save }
   		it { should_not be_valid }
   	end
+    context "wrongly formatted" do 
+      it "(should be invalid)" do 
+        plate_numbers = [ "axb 00 i1", "00000", "AXB 0.0.0.", ".^dasdasdasd", "AXB 1234 23 " ]
+        plate_numbers.each do |invalid_num|
+          @vehicle.reg_no = invalid_num
+          @vehicle.should_not be_valid
+        end
+      end
+    end
+    context "correctly formatted" do 
+      it "(should be valid)" do 
+        plate_numbers = [ "AXB 1234", "AXB34567", "ISF 123 1234", "A 234 5" ]
+        plate_numbers.each do |valid_num|
+          @vehicle.reg_no = valid_num
+          @vehicle.should be_valid
+        end
+      end
+    end
   end
 
   describe "Reservations:" do
-  	before { @vehicle.reg_no = "registration no" if @vehicle.reg_no.nil?
+  	before { @vehicle.reg_no = "AXB 1234" if @vehicle.reg_no.nil?
   		     @r = Reservation.new
   		     @r.vehicles << @vehicle
   		     @r.save

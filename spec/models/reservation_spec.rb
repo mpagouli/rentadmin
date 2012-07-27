@@ -16,7 +16,7 @@ describe Reservation do
 
   before { @model = Model.new(model_name:"model")
   	       @make = Make.new(make_name:"make")
-  	       @vehicle = Vehicle.new(reg_no:"registration no") 
+  	       @vehicle = Vehicle.new(reg_no:"AXB 1234") 
   	       @model.make = @make
            @vehicle.model = @model
            @res = Reservation.new(startDate: Date.new(2012, 7, 9), endDate:Date.new(2012,7,19), duration:11)

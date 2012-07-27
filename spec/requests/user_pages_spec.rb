@@ -43,7 +43,7 @@ describe "UserPages" do
   describe "Signup page" do
     before { visit signup_path }
     let(:submit) { "Create Account" }
-    context "submit with valid information" do 
+    context "submit with invalid information" do 
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end

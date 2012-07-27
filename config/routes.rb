@@ -85,6 +85,6 @@ Rentadmin::Application.routes.draw do
   match '/operation', to: 'menu_pages#operation'
   match '/board', to: 'menu_pages#board'
 
-  match '/vehicles_home', to: 'vehicles#vehicles_home'
+  match '/filter_models', to: 'vehicles#filter_models'
 
 end

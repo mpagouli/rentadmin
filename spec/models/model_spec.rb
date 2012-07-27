@@ -29,6 +29,7 @@ describe Model do
   it { should respond_to(:make) }
   it { should respond_to(:group) }
   it { should respond_to(:vehicles) }
+  it { should respond_to(:assets) }
   it { should_not be_valid }
 
   describe "Make:" do
@@ -90,7 +91,7 @@ describe Model do
   	before { @model.model_name = "valid name" if @model.model_name.nil?
   		     @v1 = Vehicle.new
   		     @v1.model = @model
-  		     @v2 = Vehicle.new(reg_no:"valid second reg no")
+  		     @v2 = Vehicle.new(reg_no:"AXB 2222")
   		     @v2.model = @model
   	         @model.vehicles << @v1 
   	         @model.vehicles << @v2 
@@ -103,7 +104,7 @@ describe Model do
   		it { should be_valid }
   	end
   	context "two valid ones" do 
-  		before { @v1.reg_no="valid first reg no" 
+  		before { @v1.reg_no="AXV 1111" 
   				 @model.vehicles << @v1 
   			   }
   		it { should be_valid }

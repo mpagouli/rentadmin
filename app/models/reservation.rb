@@ -12,7 +12,7 @@
 
 class Reservation < ActiveRecord::Base
   attr_accessible :duration, :endDate, :startDate
-  has_many :reservation_vehicles
+  has_many :reservation_vehicles, :dependent => :restrict
   has_many :vehicles, :through => :reservation_vehicles, :source => :vehicle
   validates_associated :vehicles
   validates :vehicles, :presence => { :message => "At least one vehicle is required" }

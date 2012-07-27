@@ -17,7 +17,7 @@ end
 
 group :development do
   gem 'pg',          '0.12.2'
-  gem 'rspec-rails', '2.10.0'
+  gem 'rspec-rails', '2.11.0'
   gem 'annotate',    '~> 2.4.1.beta'
 end
 
@@ -29,6 +29,11 @@ gem 'bcrypt-ruby', '3.0.1'
 group :test do
   gem 'capybara',           '1.1.2'
   gem 'factory_girl_rails', '1.4.0'
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'launchy', '2.1.0'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  #gem 'selenium-webdriver', '2.5.0'
 end
 
 group :production do

@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :vehicle do
-    sequence(:reg_no) { |n| "#{n}" }
+    sequence(:reg_no) { |n| "AAA #{n}" }
     model
   end 
 

@@ -21,3 +21,6 @@ doc/
 *~
 .project
 .DS_Store
+
+#Ignore launchy html files
+capybara*.html
