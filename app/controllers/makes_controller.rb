@@ -1,11 +1,5 @@
 class MakesController < ApplicationController
   
-  #def popup_new
-  #	respond_to do |format|
-  #    format.js
-  #	end
-  #end
-
   def new
   	@make = Make.new
   	render :new, :layout => false
@@ -14,7 +8,7 @@ class MakesController < ApplicationController
   #Ajax
   def savemake
 	#return render :text => "Param is #{params[:make_name]}"
-	@make = Make.new(make_name: params[:make_name], description: params[:description])
+	@make = Make.new(make_name: params[:make_name], description: params[:make_description])
 	respond_to do |format|
 	  if @make.save
         format.json { render :json =>  { make: @make, errors: nil, success:true } }

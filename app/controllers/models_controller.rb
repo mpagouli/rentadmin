@@ -17,8 +17,8 @@ class ModelsController < ApplicationController
 
     #Ajax
     def savemodel
-	  #return render :text => "Param is #{params[:make_name]}"
-	  @model = Make.find(params[:make_id]).models.build!(model_name: params[:model_name], description: params[:description])
+	  #return render :text => "Param is #{params[:makeid]}"
+	  @model = Make.find(params[:makeid]).models.build(model_name: params[:model_name], description: params[:model_description])
 	  respond_to do |format|
 	    if @model.save
           format.json { render :json =>  { model: @model, errors: nil, success:true } }
@@ -33,17 +33,21 @@ class ModelsController < ApplicationController
     end
 
 	#def create
-	#	@make = params[:make][:id].blank? ? nil : Make.find(params[:make][:id])
-	#	@model = params[:model][:id].blank? ? nil : Model.find(params[:model][:id])
-	#	@vehicle = @model.nil? ? Vehicle.new(:reg_no => params[:reg_no]) : @model.vehicles.build(:reg_no => params[:reg_no])
-	#	if @vehicle.save
-	#	    flash[:success] = "Vehicle inserted successfully!"
-	#	    redirect_to @vehicle
-	#	else
-	#	    render 'new'
-	#	end
+	#	#return render :text => "Param is #{Make.find(params[:makeid]).models.count}"
+	#	@model = Make.find(params[:makeid]).models.build(:model_name => params[:model_name], :description => params[:model_description])
+	#  	respond_to do |format|
+	#    if @model.save
+    #      format.json { render :json =>  { model: @model, errors: nil, success:true } }
+    #    else
+    #  	  @errors = []
+    #  	  @model.errors.each do |key,value|
+    #  		@errors.push(value)
+    #  	  end
+    #  	  format.json { render :json =>  { model: @model, errors: @errors, success:false } }
+    #    end
+    #  end
 	#end
-
+#
 	#def show
 	#	@vehicle = Vehicle.find(params[:id])
 	#end

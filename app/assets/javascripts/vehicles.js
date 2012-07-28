@@ -16,16 +16,16 @@ $(document).ready(function() {
 
 	//New - Edit
 	if( $(".vehicle-form") !== undefined ){
-		
 		//New Make Dialog
         $("#make_new_dialog").dialog({ 
         	autoOpen:false,
-        	height: 300,
-			width: 450,
+        	height: 375,
+			width: 265,
 			modal: true,
 			close: function() {
 				$("input#make_name").attr('value','');
-				$("textarea#description").attr('value','');
+				$("textarea#make_description").attr('value','');
+				$("div#make_error_explanation").html('');
 			}
         });
 		$(".add_make").click(function(e){
@@ -33,13 +33,15 @@ $(document).ready(function() {
 			$("#make_new_dialog .center-button input").click(function(ee){
 				$.ajax({
 				  url: '/savemake',
-				  data: 'make_name='+$("input#make_name").attr('value')+'&description='+$("textarea#description").attr('value'),
+				  data: 'make_name='+$("input#make_name").attr('value')+'&make_description='+$("textarea#make_description").attr('value'),
 				  dataType: 'json',
 				  success: function(data) { 
 				  	if(data.success){
+				  		$('#make_id').find(':selected').removeAttr('selected');
 				  		options = $('#make_id').html();
-				  		options += "<option value='"+data.make.id+"'>"+data.make.make_name+"</option>";
+				  		options += "<option value='"+data.make.id+"' selected>"+data.make.make_name+"</option>";
 				  		options = $('#make_id').html(options);
+				  		$('#make_id').trigger('change');
 				  		$("#make_new_dialog").dialog('close');
 				  	}
 				  	else{
@@ -48,15 +50,15 @@ $(document).ready(function() {
 				    		errorlist += "<li>* "+ data.errors[i] +"</li>";
 				    	}
 				    	errorlist += '</ul>';
-				    	$("div#error_explanation").html(errorlist);
+				    	$("div#make_error_explanation").html(errorlist);
 				    	$("input#make_name").attr('value',data.make.make_name);
-				    	$("textarea#description").attr('value',data.make.description);
+				    	$("textarea#make_description").attr('value',data.make.description);
 				  	}
 				  }
 				});
 			});
 			$("#make_new_dialog").dialog('open');
-			$("#make_new_dialog").dialog( "option", "position","center" )
+			$("#make_new_dialog").dialog( "option", "position","bottom" )
 		});
 
 		$("#make_id").change(function(e){
@@ -75,34 +77,39 @@ $(document).ready(function() {
 			    $('#model_id').prev("label").children("a").show();
 			    $('#model_id').parent().addClass("control-group success");
 			    $('#model_id').next("label").html(data.length+" models of make: "+selected.text());
-			    $("input#make_id").attr('value',selected.val());
+			    $("input#makeid").attr('value',selected.val());
 			  }
 			});
 		});
 
 		//New Model Dialog
+		$("input#makeid").hide();
         $("#model_new_dialog").dialog({ 
         	autoOpen:false,
-        	height: 300,
-			width: 450,
+        	height: 385,
+			width: 265,
 			modal: true,
 			close: function() {
 				$("input#model_name").attr('value','');
-				$("textarea#description").attr('value','');
+				$("textarea#model_description").attr('value','');
+				$("div#model_error_explanation").html('');
 			}
         });
 		$(".add_model").click(function(e){
 			e.preventDefault();
 			$("#model_new_dialog .center-button input").click(function(ee){
+				ee.preventDefault();
 				$.ajax({
 				  url: '/savemodel',
-				  data: 'make_id='+$("input#make_id").attr('value')+'&model_name='+$("input#make_name").attr('value')+'&description='+$("textarea#description").attr('value'),
+				  data: 'makeid='+$("input#makeid").attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
 				  dataType: 'json',
 				  success: function(data) { 
 				  	if(data.success){
+				  		$('#model_id').find(':selected').removeAttr('selected');
 				  		options = $('#model_id').html();
-				  		options += "<option value='"+data.model.id+"'>"+data.model.model_name+"</option>";
+				  		options += "<option value='"+data.model.id+"' selected>"+data.model.model_name+"</option>";
 				  		options = $('#model_id').html(options);
+				  		$('#model_id').next("label").html("Added new model of selected make");
 				  		$("#model_new_dialog").dialog('close');
 				  	}
 				  	else{
@@ -111,15 +118,15 @@ $(document).ready(function() {
 				    		errorlist += "<li>* "+ data.errors[i] +"</li>";
 				    	}
 				    	errorlist += '</ul>';
-				    	$("div#error_explanation").html(errorlist);
+				    	$("div#model_error_explanation").html(errorlist);
 				    	$("input#model_name").attr('value',data.model.model_name);
-				    	$("textarea#description").attr('value',data.model.description);
+				    	$("textarea#model_description").attr('value',data.model.description);
 				  	}
 				  }
 				});
 			});
 			$("#model_new_dialog").dialog('open');
-			$("#model_new_dialog").dialog( "option", "position","center" )
+			$("#model_new_dialog").dialog( "option", "position","bottom" )
 		});
 	}
 

@@ -13,10 +13,11 @@ class Vehicle < ActiveRecord::Base
 
   attr_accessible :reg_no
   belongs_to :model
-  has_many :reservation_vehicles, :dependent => :restrict
-  has_many :reservations, :through => :reservation_vehicles, :source => :reservation
+  #has_many :reservation_vehicles, :dependent => :restrict
+  #has_many :reservations, :through => :reservation_vehicles, :source => :reservation
   validates :model, :presence => { :message => "Model is required" }
-  #validates_associated :reservations
+  has_many :reservations
+  validates_associated :reservations
   VALID_PlATE_REGEX = /\A[A-Z]+\s?[\d+\s?]+[\d]+\z/
   validates :reg_no, :presence => { :message => "Plate number is required" },
   			format: { with: VALID_PlATE_REGEX, message: "Plate number is invalid" }, :uniqueness => true

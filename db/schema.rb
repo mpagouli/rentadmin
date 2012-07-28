@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723132332) do
+ActiveRecord::Schema.define(:version => 20120728102541) do
 
   create_table "asset_categories", :force => true do |t|
     t.string   "name"
@@ -78,22 +78,18 @@ ActiveRecord::Schema.define(:version => 20120723132332) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "reservation_vehicles", :force => true do |t|
-    t.integer  "reservation_id"
-    t.integer  "vehicle_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "reservation_vehicles", ["reservation_id", "vehicle_id"], :name => "index_reservation_vehicles_on_reservation_id_and_vehicle_id", :unique => true
-
   create_table "reservations", :force => true do |t|
     t.datetime "startDate"
     t.datetime "endDate"
     t.decimal  "duration"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "vehicle_id"
+    t.integer  "client_id"
+    t.string   "reservation_code"
   end
+
+  add_index "reservations", ["reservation_code"], :name => "index_reservations_on_reservation_code", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -81,6 +81,8 @@ describe "VehiclePages" do
     #debugger
     it { should have_selector('a#add_make') }
     it { should have_selector('a#add_model') }
+    it { should have_selector('div#make_new_dialog') }
+    it { should have_selector('div#model_new_dialog') }
     it { should have_selector('select#make_id') }
     it { should have_selector('select#model_id') }
     context "submit with valid information", :js => true do

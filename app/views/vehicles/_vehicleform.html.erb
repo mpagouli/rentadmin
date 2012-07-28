@@ -1,5 +1,5 @@
 <%= render 'new_make', make: Make.new %>
-<%= render 'new_model', make: Model.new %>
+<%= render 'new_model', model: Model.new %>
 
 <%= render 'shared/error_messages', object: vehicle %>
 <div class="row">
@@ -8,8 +8,15 @@
 		<div class="inline">
 		
 		<%= label_tag "make" do %>
-			<%= link_to '#', :class => 'add_make' do %>
+
+			<%= link_to '#', :class => 'add_make', :title => 'Add new make' do %>
 				<i class="icon-plus-sign"></i>
+			<% end %>
+			<%= link_to '#', :class => 'edit_make', :title => 'Edit selected make' do %>
+				<i class="icon-pencil"></i>
+			<% end %>
+			<%= link_to '#', :class => 'delete_make', :title => 'Delete selected make' do %>
+				<i class="icon-minus-sign"></i>
 			<% end %> Make
 		<% end %>
 		<%= if act == 'new'
@@ -21,7 +28,7 @@
 
 		<div class="inline <%= act=='new'? 'control-group warning':'' %>">
 		<%= label_tag "model" do %>
-			<%= link_to new_model_path, :class => 'add_model', :hidden => true, :remote => true, do %>
+			<%= link_to '#', :class => 'add_model', :hidden => true, :title => 'Add new model' do %>
 				<i class="icon-plus-sign"></i>
 			<% end %> Model
 		<% end %>

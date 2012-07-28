@@ -1,14 +1,14 @@
-<div id="error_explanation"></div>
+<div id="make_error_explanation"></div>
 <div class="row">
-	<div class="span5">
-		<div class="inline">
+	<div class="span3">
+		<div>
 			<%= label_tag "make_name", 'Name' %>
 			<%= text_field_tag 'make_name', nil, :placeholder => 'Enter make name...' %>
 		</div>
-		<div class="inline">
-			<%= label_tag "description", 'Description' %>
+		<div>
+			<%= label_tag "make_description", 'Description' %>
 			
-			<%= text_area_tag 'description', nil, :rows => 10, :cols => 25, :placeholder => 'Enter make description...', :escape => true %>
+			<%= text_area_tag 'make_description', nil, :rows => 7, :cols => 25, :placeholder => 'Enter make description...', :escape => true %>
 		</div>
 	</div>
 </div>

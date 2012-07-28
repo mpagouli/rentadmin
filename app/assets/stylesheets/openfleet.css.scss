@@ -86,6 +86,10 @@ p {
   margin-right: 5px;
 }*/
 
+.navbar-fixed-top{
+  z-index: 1000;
+}
+
 
 
 
@@ -255,7 +259,7 @@ footer {
 
 /* forms */
 
-#error_explanation {
+#error_explanation, #make_error_explanation, #model_error_explanation {
   color: #f00;
   ul {
     list-style: none;
@@ -342,6 +346,23 @@ div.vehicles{
     /*border-left: 1px solid $grayLighter;*/
   }
 }
+
+
+.navbar-fixed-top{
+  z-index: 1000;
+}
+
+/* Dialogs */
+div#make_new_dialog, div#model_new_dialog{
+  overflow:hidden;
+  .center-button{
+    margin-top:5px;
+    text-align:center;
+  }
+}
+/*div#model_new_dialog{
+  overflow:hidden;
+}*/
 
 
 
