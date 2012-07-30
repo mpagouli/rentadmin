@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728102541) do
+ActiveRecord::Schema.define(:version => 20120730125849) do
 
   create_table "asset_categories", :force => true do |t|
     t.string   "name"
@@ -79,17 +79,22 @@ ActiveRecord::Schema.define(:version => 20120728102541) do
   end
 
   create_table "reservations", :force => true do |t|
-    t.datetime "startDate"
-    t.datetime "endDate"
     t.decimal  "duration"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "vehicle_id"
     t.integer  "client_id"
     t.string   "reservation_code"
+    t.datetime "pick_up_date"
+    t.datetime "drop_off_date"
+    t.string   "status",           :default => "PENDING"
   end
 
+  add_index "reservations", ["drop_off_date"], :name => "index_reservations_on_drop_off_date"
+  add_index "reservations", ["pick_up_date", "drop_off_date"], :name => "index_reservations_on_pick_up_date_and_drop_off_date"
+  add_index "reservations", ["pick_up_date"], :name => "index_reservations_on_pick_up_date"
   add_index "reservations", ["reservation_code"], :name => "index_reservations_on_reservation_code", :unique => true
+  add_index "reservations", ["status"], :name => "index_reservations_on_status"
 
   create_table "users", :force => true do |t|
     t.string   "name"

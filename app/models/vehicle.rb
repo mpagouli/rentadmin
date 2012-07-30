@@ -16,7 +16,7 @@ class Vehicle < ActiveRecord::Base
   #has_many :reservation_vehicles, :dependent => :restrict
   #has_many :reservations, :through => :reservation_vehicles, :source => :reservation
   validates :model, :presence => { :message => "Model is required" }
-  has_many :reservations
+  has_many :reservations, :dependent => :restrict
   validates_associated :reservations
   VALID_PlATE_REGEX = /\A[A-Z]+\s?[\d+\s?]+[\d]+\z/
   validates :reg_no, :presence => { :message => "Plate number is required" },

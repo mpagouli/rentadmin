@@ -1,5 +1,7 @@
 Rentadmin::Application.routes.draw do
 
+  get "reservations/new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -96,8 +98,12 @@ Rentadmin::Application.routes.draw do
   match '/makemodify', to: 'makes#makemodify'
   match '/dropmake', to: 'makes#dropmake'
   match '/savemodel', to: 'models#savemodel'
-
-  
+  match '/modelopen', to: 'models#modelopen'
+  match '/modelmodify', to: 'models#modelmodify'
+  match '/dropmodel', to: 'models#dropmodel'
+  match '/book_vehicle', to: 'reservations#book_vehicle'
+  match '/show_duration', to: 'reservations#show_duration'
+  match '/check_drop_date', to: 'reservations#check_drop_date'
 
 
 end

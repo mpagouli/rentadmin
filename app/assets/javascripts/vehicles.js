@@ -19,7 +19,7 @@ $(document).ready(function() {
         });
         $("#confirm_dialog").dialog({ 
         	autoOpen:false,
-        	height: 200,
+        	height: 150,
 			width: 250
         });
 
@@ -69,6 +69,9 @@ $(document).ready(function() {
 				});
 			});
 			$("input#makeid").attr('value',$("#make_id").find(":selected").attr('value'));
+			$("#make_new_dialog .center-button input").attr('value','Insert Make');
+			$("input#make_name").attr('value','');
+			$("textarea#make_description").attr('value','');
 			$("#make_new_dialog").dialog('option','title','New Make');
 			$("#make_new_dialog").dialog('open');
 			$("#make_new_dialog").dialog( "option", "position","bottom" )
@@ -91,7 +94,7 @@ $(document).ready(function() {
 					$("#make_new_dialog").dialog('open');
 					$("#make_new_dialog").dialog( "option", "position","bottom" )
 				  }
-				  else{
+				  else{ 
 				    $("div#msg_dialog").html(data.errors[0]);
 				    $("div#msg_dialog").dialog('option','title','Failure');
 				    $("#msg_dialog").dialog('open');
@@ -130,6 +133,8 @@ $(document).ready(function() {
 		//Delete Make Dialog.............................................................
 		$(".delete_make").click(function(e){
 			e.preventDefault();
+			$("#confirm_dialog .center-button button").first().unbind('click');
+			$("#confirm_dialog .center-button button").last().unbind('click');
 			var selectedid = $("#make_id").find(":selected").attr('value');
 			$.ajax({
 				url: '/makeopen',
@@ -140,7 +145,7 @@ $(document).ready(function() {
 				 	$("input#object_id").attr('value',data.make.id);
 				 	$("div#confirm_dialog").dialog('open');
 				  }
-				  else{
+				  else{ 
 				    $("div#msg_dialog").html(data.errors[0]);
 				    $("div#msg_dialog").dialog('option','title','Failure');
 				    $("#msg_dialog").dialog('open');
@@ -162,44 +167,10 @@ $(document).ready(function() {
 				  		$('#make_id').find("option[value='']").attr('selected');
 				  		$('#make_id').trigger('change');
 				  	}
-				  	else{
-				  		
-				  		/*if(data.errors[0].indexOf('dependent models')!=-1){
-				    		$("input#object_id").attr('value',data.make.id);
-				    		$("div#confirm_dialog div").first().html('There are still models of the specific make. Do you want to delete them too?');
-				 			$("#confirm_dialog .center-button button").first().click(function(ee){
-								$("#confirm_dialog").dialog('close');
-								$.ajax({
-								  url: '/drop_models_too',
-								  data: 'makeid='+$("input#object_id").attr('value'),
-								  dataType: 'json',
-								  success: function(data) { 
-								  	if(data.success){
-								  		$("div#msg_dialog").html('Successfully deleted make and models');
-								    	$("div#msg_dialog").dialog('option','title','Success');
-								    	$("#msg_dialog").dialog('open');
-								  		$('#make_id').find(':selected').remove();
-								  		$('#make_id').find("option[value='']").attr('selected');
-								  		$('#make_id').trigger('change');
-								  	}
-								  	else{
-								    	$("div#msg_dialog").html(data.errors[0]);
-								    	$("div#msg_dialog").dialog('option','title','Failure');
-								    	$("#msg_dialog").dialog('open');
-								  	}
-								  }
-								});
-							});
-							$("#confirm_dialog .center-button button").last().click(function(ee){
-								$("#confirm_dialog").dialog('close');
-							});
-				 			$("div#confirm_dialog").dialog('open');
-				    	}
-				    	else{*/
-				    		$("div#msg_dialog").html(data.errors[0]);
-				    		$("div#msg_dialog").dialog('option','title','Failure');
-				    		$("#msg_dialog").dialog('open');
-				    	//}
+				  	else{ 
+				    	$("div#msg_dialog").html(data.errors[0]);
+				    	$("div#msg_dialog").dialog('option','title','Failure');
+				    	$("#msg_dialog").dialog('open');
 				  	}
 				  }
 				});
@@ -209,7 +180,7 @@ $(document).ready(function() {
 			});
 		});
 
-
+		//MAKE SELECT LIST
 		$("#make_id").change(function(e){
 			var i, selected, options;
 			selected = $(e.target).find(":selected");
@@ -228,7 +199,6 @@ $(document).ready(function() {
 				    $('#model_id').parent().removeClass("control-group warning");
 				    $('#model_id').parent().addClass("control-group success");
 				    $('#model_id').next("label").html(data.length+" models of make: "+selected.text());
-				    //$("input#makeid").attr('value',selected.val());
 				  }
 				});
 			}
@@ -241,8 +211,11 @@ $(document).ready(function() {
 			}
 		});
 
-		//New Model Dialog
+		//MODELS
+		//New Model Dialog............................................................................
+		$("input#modelid").hide();
 		$("input#makeid").hide();
+		$("input#objectid").hide();
         $("#model_new_dialog").dialog({ 
         	autoOpen:false,
         	height: 385,
@@ -252,7 +225,9 @@ $(document).ready(function() {
 				$("input#model_name").attr('value','');
 				$("textarea#model_description").attr('value','');
 				$("div#model_error_explanation").html('');
-				$("input#makeid").attr('value','')
+				$("input#makeid").attr('value','');
+				$("input#modelid").attr('value','');
+				$("input#objectid").attr('value','')
 			}
         });
 		$(".add_model").click(function(e){
@@ -286,9 +261,247 @@ $(document).ready(function() {
 				});
 			});
 			$("input#makeid").attr('value',$("#make_id").find(":selected").attr('value'));
+			$("#model_new_dialog .center-button input").attr('value','Insert Model');
+			$("input#modelid").attr('value','');
+			$("input#model_name").attr('value','');
+			$("textarea#model_description").attr('value','');
+			$("#model_new_dialog").dialog('option','title','New Model');
 			$("#model_new_dialog").dialog('open');
 			$("#model_new_dialog").dialog( "option", "position","bottom" )
 		});
+		
+		//Edit Model Dialog.............................................................
+		$(".edit_model").click(function(e){
+			e.preventDefault();
+			var selectedid = $("#model_id").find(":selected").attr('value');
+			$.ajax({
+				url: '/modelopen',
+				data: 'modelid='+selectedid,
+				dataType: 'json',
+				success: function(data) { 
+				 if(data.success){
+				 	$("#model_new_dialog .center-button input").attr('value','Save changes');
+				 	$("input#modelid").attr('value',data.model.id);
+				  	$("input#model_name").attr('value',data.model.model_name);
+					$("textarea#model_description").attr('value',data.model.description);
+					$("#model_new_dialog").dialog('option','title','Edit Model');
+					$("#model_new_dialog").dialog('open');
+					$("#model_new_dialog").dialog( 'option', 'position','bottom');
+				  }
+				  else{
+				    $("div#msg_dialog").html(data.errors[0]);
+				    $("div#msg_dialog").dialog('option','title','Failure');
+				    $("#msg_dialog").dialog('open');
+				  }
+				 }
+			});
+			$("#model_new_dialog .center-button input").click(function(ee){
+				ee.preventDefault();
+				$.ajax({
+				  url: '/modelmodify',
+				  data: 'modelid='+$("input#modelid").attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
+				  dataType: 'json',
+				  success: function(data) { 
+				  	if(data.success){
+				  		$('#model_id').find(':selected').removeAttr('selected');
+				  		var opt = $('#model_id').find("option[value='"+$("input#modelid").attr('value')+"']");
+				  		opt.html(data.model.model_name);
+				  		opt.attr('selected','selected');
+				  		$('#model_id').trigger('change');
+				  		$('#model_id').next("label").html("Modified selected model");
+				  		$("#model_new_dialog").dialog('close');
+				  	}
+				  	else{
+				  		var errorlist = '<ul>';
+				  		for(i = 0; i < data.errors.length; i += 1){
+				    		errorlist += "<li>* "+ data.errors[i] +"</li>";
+				    	}
+				    	errorlist += '</ul>';
+				    	$("div#model_error_explanation").html(errorlist);
+				    	$("input#model_name").attr('value',data.model.model_name);
+				    	$("textarea#model_description").attr('value',data.model.description);
+				  	}
+				  }
+				});
+			});
+		});
+		//Delete Model Dialog.............................................................
+		$(".delete_model").click(function(e){
+			e.preventDefault();
+			$("#confirm_dialog .center-button button").first().unbind('click');
+			$("#confirm_dialog .center-button button").last().unbind('click');
+			var selectedid = $("#model_id").find(":selected").attr('value');
+			$.ajax({
+				url: '/modelopen',
+				data: 'modelid='+selectedid,
+				dataType: 'json',
+				success: function(data) { 
+				 if(data.success){
+				 	$("input#object_id").attr('value',data.model.id);
+				 	$("div#confirm_dialog").dialog('open');
+				  }
+				  else{ 
+				    $("div#msg_dialog").html(data.errors[0]);
+				    $("div#msg_dialog").dialog('option','title','Failure');
+				    $("#msg_dialog").dialog('open');
+				  }
+				 }
+			});
+			$("#confirm_dialog .center-button button").first().click(function(ee){
+				$("#confirm_dialog").dialog('close');
+				$.ajax({
+				  url: '/dropmodel',
+				  data: 'modelid='+$("input#object_id").attr('value'),
+				  dataType: 'json',
+				  success: function(data) { 
+				  	if(data.success){ 
+				  		$("div#msg_dialog").html('Successfully deleted model');
+				    	$("div#msg_dialog").dialog('option','title','Success');
+				    	$("#msg_dialog").dialog('open');
+				  		$('#model_id').find(':selected').remove();
+				  		$('#modele_id').find("option[value='']").attr('selected');
+				  		$('#model_id').trigger('change');
+				  		$('#model_id').next("label").html("Deleted model of selected make");
+				  	}
+				  	else{
+				    	$("div#msg_dialog").html(data.errors[0]);
+				    	$("div#msg_dialog").dialog('option','title','Failure');
+				    	$("#msg_dialog").dialog('open');
+				  	}
+				  }
+				});
+			});
+			$("#confirm_dialog .center-button button").last().click(function(ee){
+				$("#confirm_dialog").dialog('close');
+			});
+		});
+	}
+
+
+	//Book Vehicle
+	if( $("#book_vehicle") !== undefined ){ 
+		
+		//Date pickers
+		$("#drop_off_date, #pick_up_date").datetimepicker({ 
+			dateFormat: "dd/mm/yy",  
+        	beforeShow: function(a) {
+        		var b = new Date();  
+    			var c = new Date(b.getFullYear(), b.getMonth(), b.getDate());  
+    			if (a.id == 'drop_off_date') {  
+        			if ($('#pick_up_date').datepicker('getDate') != null) {  
+            			c = $('#pick_up_date').datepicker('getDate');  
+       			 	}  
+    			}  
+    			return {  
+        			minDate: c  
+    			}  
+        	}	
+		});
+		/*$("#pick_up_date").datepicker({ 
+			dateFormat: "dd/mm/yy",
+			onSelect: function(dateText, inst) { 
+				$("#drop_off_date").datepicker()
+			} 
+			beforeShowDay: function(date) { alert('xox')
+				$.ajax({
+					url: '/check_drop_date',
+					data: 'dat='+$.datepicker.formatDate('dd/mm/yy', date)+'&vehicleid='+$("input#vehicleid").attr('value'),
+					dataType: 'json',
+					success: function(data) { 
+					  if(data.date_restricted){ 
+					  	return [false, ""]
+					  }
+					  else{
+					  	return [true, ""]
+					  }
+					}
+				});
+			}
+		});*/
+		$("#drop_off_date, #pick_up_date").change(function(e){
+			var from, to, diff, mins, hours, days;
+			/*to = $("#drop_off_date").datepicker('getDate');
+			from = $("#pick_up_date").datepicker('getDate');
+			diff = new Date(to - from);
+			mins = diff/1000/60;
+			hours = mins/60;
+			days = hours/24;*/
+			$.ajax({
+				url: '/show_duration',
+				data: 'from='+$("input#pick_up_date").attr('value')+'&to='+$("input#drop_off_date").attr('value'),
+				dataType: 'json',
+				success: function(data) { 
+				  if(data.duration!=''){ 
+				  	$("textarea#duration").attr('value',data.duration);
+				  }
+				  else{
+				  	$("textarea#duration").attr('value','There was a problem with defining the duration');
+				  }
+				}
+			});
+		});
+
+		$("input#vehicleid").hide();
+        $("#book_vehicle_dialog").dialog({ 
+        	autoOpen:false,
+        	height: 385,
+			width: 900,
+			modal: true,
+			close: function() {
+				$("select#client_id option:selected").removeAttr("selected");
+				$("select#status_id option:selected").removeAttr("selected");
+				$("select#status_id option[value='1']").attr('selected','selected');
+				$("input#pick_up_date").datepicker('setDate', null);
+				$("input#drop_off_date").datepicker('setDate', null);
+				$("textarea#duration").attr('value','');
+				$("input#reservation_code").attr('value','');
+				$("div#res_error_explanation").html('');
+			}
+        });
+		$("#book_vehicle").click(function(e){ 
+			e.preventDefault();
+			$("#book_vehicle_dialog .center-button input").click(function(ee){
+				ee.preventDefault();
+				var datastring = 'client_id='+$("select#client_id").attr('value')+
+								 '&vehicleid='+$("input#vehicleid").attr('value')+
+								 '&pickup='+$("input#pick_up_date").attr('value')+
+								 '&dropoff='+$("input#drop_off_date").attr('value')+
+								 '&rescode='+$("input#reservation_code").attr('value');
+				$.ajax({
+				  url: '/book_vehicle',
+				  data: datastring,
+				  dataType: 'json',
+				  success: function(data) { 
+				  	if(data.success){
+				  		window.location.replace('/vehicles/'+$("input#vehicleid").attr('value'));
+				  		$("#book_vehicle_dialog").dialog('close');
+				  	}
+				  	else{
+				  		var errorlist = '<ul>';
+				  		for(i = 0; i < data.errors.length; i += 1){
+				    		errorlist += "<li>* "+ data.errors[i] +"</li>";
+				    	}
+				    	errorlist += '</ul>';
+				    	$("div#res_error_explanation").html(errorlist);
+				    	//$("input#model_name").attr('value',data.model.model_name);
+				    	//$("textarea#model_description").attr('value',data.model.description);
+				  	}
+				  }
+				});
+			});
+			//$("input#vehicleid").attr('value',$("#sel_vehicle_id").attr('value'));
+			$("#book_vehicle_dialog .center-button input").attr('value','Make Reservation');
+			//$("input#resid").attr('value','');
+			//$("input#model_name").attr('value','');
+			//$("textarea#model_description").attr('value','');
+			$("#book_vehicle_dialog").dialog('option','title','New Reservation');
+			$("#book_vehicle_dialog").dialog('open');
+			$("#book_vehicle_dialog").dialog( "option", "position","bottom" );
+		});
+
+		
+
+
 	}
 
 

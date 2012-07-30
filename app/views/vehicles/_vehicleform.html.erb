@@ -1,56 +1,23 @@
 <%= render 'shared/error_messages', object: vehicle %>
 <div class="row">
-	<div class="span11">
+	<div class="span4">
 
-		<div class="inline">
-		
-		<%= label_tag "make" do %>
-
-			<%= link_to '#', :class => 'add_make', :title => 'Add new make' do %>
-				<i class="icon-plus-sign"></i>
-			<% end %>
-			<%= link_to '#', :class => 'edit_make', :title => 'Edit selected make' do %>
-				<i class="icon-pencil"></i>
-			<% end %>
-			<%= link_to '#', :class => 'delete_make', :title => 'Delete selected make' do %>
-				<i class="icon-minus-sign"></i>
-			<% end %> Make
-		<% end %>
-		<%= if act == 'new'
-				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
-			else
-				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
-			end %>
-		</div>
-
-		<div class="inline <%= act=='new'? 'control-group warning':'' %>">
-		<%= label_tag "model" do %>
-			<%= link_to '#', :class => 'add_model', :hidden => true, :title => 'Add new model' do %>
-				<i class="icon-plus-sign"></i>
-			<% end %> Model
-		<% end %>
-		<%= if act == 'new'
-				select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true })
-			else
-				select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 
-				
-			end %>
-			<label><%= act=='new'? 'Select make to filter models list':'' %></label>
-		</div>
+		<%= render :partial => 'vehicles/make_model/makemodelfields',  :locals => { :vehicle => vehicle, :act => act }  %>
+	</div>
+	<div class="span7">
 		<div class="right">
-		<%= label_tag "reg_no", 'License plate number' %>
-		<%= if act == 'new'
+			<%= label_tag "reg_no", 'License plate number' %>
+			<%= if act == 'new'
 				text_field_tag 'reg_no', nil, :placeholder => 'Enter licenseplate number...'
 			else 
 				text_field_tag 'reg_no', vehicle.reg_no, :readonly => true 
 			end %>
 		</div>
-
 	</div>
 </div>
 
-<%= render 'new_make', make: Make.new %>
-<%= render 'new_model', model: Model.new %>
+<%= render :partial => 'vehicles/make_model/new_make', :locals => { make: Make.new } %>
+<%= render :partial => 'vehicles/make_model/new_model', :locals => { model: Model.new } %>
 <div id="msg_dialog" title="Message"></div>
-<%= render 'confirm_delete' %>
+<%= render :partial => 'vehicles/make_model/confirm_delete' %>
 

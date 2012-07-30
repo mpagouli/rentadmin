@@ -32,7 +32,16 @@ body {
 
 section {
   overflow: auto;
+  &.fieldset{
+    border: 1px solid #eeeeee;
+    padding: 5px 38px;
+  }
+  div.field {
+    margin-top:15px;
+  }
 }
+
+
 
 textarea {
   resize: vertical;
@@ -259,7 +268,7 @@ footer {
 
 /* forms */
 
-#error_explanation, #make_error_explanation, #model_error_explanation {
+#error_explanation, #make_error_explanation, #model_error_explanation, #res_error_explanation {
   color: #f00;
   ul {
     list-style: none;
@@ -357,9 +366,28 @@ div#make_new_dialog, div#model_new_dialog{
     text-align:center;
   }
 }
-/*div#model_new_dialog{
+div#msg_dialog, div#confirm_dialog{
   overflow:hidden;
-}*/
+  .center-button{
+    margin-top:30px;
+    text-align:center;
+  }
+  label{
+    text-align:center;
+    margin-top:5px;
+  }
+}
+div#book_vehicle_dialog{
+  overflow:hidden;
+  .center-button{
+    margin-top:5px;
+    text-align:center;
+  }
+  div.inline{
+    float:left;
+    margin:0px 6px;
+  }
+}
 
 
 

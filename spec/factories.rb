@@ -33,4 +33,19 @@ FactoryGirl.define do
     model
   end 
 
+  factory :client do
+    sequence(:name)  { |n| "Customer #{n}" }
+    sequence(:surname)  { |n| "Surname #{n}" }
+    sequence(:email) { |n| "customer_#{n}@example.com"}   
+  end
+
+  factory :reservation do
+    sequence(:reservation_code) { |n| "ResCode #{n}" }
+    sequence(:pick_up_date) { |n| Date.today + n }
+    sequence(:drop_off_date) { |n| Date.today + n + (n % 10) + 1 }
+    sequence(:duration) { |n| (Date.today + n + (n % 10) + 1) - (Date.today + n) }
+    vehicle
+    client
+  end 
+
 end

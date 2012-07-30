@@ -6,6 +6,8 @@ namespace :db do
     make_models
     make_vehicles
     make_users
+    make_clients
+    make_reservations
   end
 end
 
@@ -78,5 +80,58 @@ def make_users
                  email: email,
                  password: password,
                  password_confirmation: password)
+  end
+end
+
+def make_clients
+  40.times do |n|
+    fullname = Faker::Name.name
+    name = fullname.split(" ")[0]
+    surname = fullname.split(" ")[1]
+    email = "cust_example#{n+1}@example.com"
+    Client.create!(name: name, 
+                   surname: surname,
+                   email: email)
+  end
+end
+
+def make_reservations
+  clients = Client.all(limit: 20)
+  vehicles = Vehicle.all(limit: 20)
+  clients[0..9].each_with_index do |client,i|
+      counter = 3
+      status = 'PENDING'
+      2.times do |n|
+        stD = Date.today + counter
+        eD = stD + counter + 2
+        duration = eD -stD
+        resCode = rand(12**12).to_s
+        while resCode.to_s.length != 12
+          resCode = rand(12**12).to_s
+        end
+        res = vehicles[i].reservations.new(pick_up_date: stD, duration: duration, drop_off_date: eD, reservation_code: resCode, status: status)
+        res.client = client
+        res.save!
+        counter += 30
+        status = 'CONFIRMED'
+      end
+  end
+  clients[10..19].each_with_index do |client,i|
+      counter = 5
+      status = 'CANCELLED'
+      2.times do |n|
+        stD = Date.today + counter
+        eD = stD + counter + 2
+        duration = eD - stD
+        resCode = rand(12**12).to_s
+        while resCode.to_s.length != 12
+          resCode = rand(12**12).to_s
+        end
+        res = vehicles[i].reservations.new(pick_up_date: stD, duration: duration, drop_off_date: eD, reservation_code: resCode, status: status)
+        res.client = client
+        res.save!
+        counter += 30
+        status = 'CONFIRMED'
+      end
   end
 end

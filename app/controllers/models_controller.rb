@@ -9,11 +9,11 @@ class ModelsController < ApplicationController
 	#	@help_href = '#'
 	#end
 
-	def new
-		@model = Model.new
-		#@help_href = '#'
-		render :new, :layout => false
-	end
+	#def new
+	#	@model = Model.new
+	#	#@help_href = '#'
+	#	render :new, :layout => false
+	#end
 
     #Ajax
     def savemodel
@@ -31,6 +31,51 @@ class ModelsController < ApplicationController
         end
       end
     end
+
+    #Ajax
+  def modelopen
+    if !params[:modelid].empty?
+      @model = Model.find(params[:modelid])
+      respond_to do |format|
+          format.json { render :json =>  { model: @model, errors: nil, success:true } }
+      end
+    else
+      respond_to do |format|
+          format.json { render :json =>  { model: nil, errors: ["No model selected!"], success:false } }
+      end
+    end
+  end
+
+  #Ajax
+  def modelmodify
+  @model = Model.find(params[:modelid])
+  respond_to do |format|
+    if @model.update_attributes(:model_name => params[:model_name], :description => params[:model_description])
+        format.json { render :json =>  { model: @model, errors: nil, success:true } }
+      else
+        @errors = []
+        @model.errors.each do |key,value|
+          @errors.push(value)
+        end
+        format.json { render :json =>  { model: @model, errors: @errors, success:false } }
+      end
+    end
+  end
+
+  #Ajax
+  def dropmodel
+    begin
+      Model.find(params[:modelid]).destroy
+      respond_to do |format|
+          format.json { render :json =>  { errors: nil, success:true } }
+      end
+    rescue Exception => e
+      logger.error e.message
+      respond_to do |format|
+          format.json { render :json =>  { errors: [e.message], success:false } }
+      end
+    end
+  end
 
 	#def create
 	#	#return render :text => "Param is #{Make.find(params[:makeid]).models.count}"
@@ -72,16 +117,16 @@ class ModelsController < ApplicationController
 	#	end
 	#end
 
-	def destroy
-		begin
-		Model.find(params[:id]).destroy
-    	  flash[:success] = "Vehicle destroyed."
-		  redirect_to vehicles_path
-		rescue Exception => e
-			logger.error e.message
-			flash.now[:error] = e.message
-			render 'show'
-		end
-	end
+	#def destroy
+	#	begin
+	#	Model.find(params[:id]).destroy
+    #	  flash[:success] = "Vehicle destroyed."
+	#	  redirect_to vehicles_path
+	#	rescue Exception => e
+	#		logger.error e.message
+	#		flash.now[:error] = e.message
+	#		render 'show'
+	#	end
+	#end
 
 end

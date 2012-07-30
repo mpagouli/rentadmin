@@ -3,13 +3,12 @@
 # Table name: models
 #
 #  id          :integer         not null, primary key
-#  description :string(255)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  make_id     :integer
-#  model_id    :integer
 #  group_id    :integer
 #  model_name  :string(255)
+#  description :string(400)
 #
 
 require 'spec_helper'

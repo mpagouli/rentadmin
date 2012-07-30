@@ -32,6 +32,13 @@ class VehiclesController < ApplicationController
 
 	def show
 		@vehicle = Vehicle.find(params[:id])
+		@current_reservations = []
+		%w[PENDING CONFIRMED RUNNING].each do |status| 
+			res = Reservation.where('vehicle_id=? and status=?',@vehicle.id, status)
+			if res.count != 0
+				@current_reservations.push({ :status => status, :count => res.count })
+			end
+		end
 	end
 
 	def edit

@@ -1,11 +1,30 @@
 <% provide(:title, @vehicle.reg_no) %>
 <div class="main-content">
 	<h2><%= yield(:title) %></h2>
+	<%= render 'shared/flash_messages' %>
 	<div class="row">
-		<%= render 'shared/flash_messages' %>
-		<%= @vehicle.model.model_name %>
-		<%= @vehicle.model.make.make_name %><br/>
-		<%= link_to "edit", edit_vehicle_path(@vehicle) %> | 
-		<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
+		<div class="span11">
+			<div class="right-button">
+				<%= button_tag "Book Vehicle", :id => 'book_vehicle', :class => 'btn btn-large btn-primary' %>
+				<%= button_tag "Vehicle's Reservations", :id => 'veh_res_list', :class => 'btn btn-large btn-primary', :hidden => @vehicle.reservations.empty? %>
+			</div>
+			<%= @vehicle.model.model_name %>
+			<%= @vehicle.model.make.make_name %><br/>
+			<%= link_to "edit", edit_vehicle_path(@vehicle) %> | 
+			<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
+
+			<div>
+				Vehicle has: 
+				<%  @current_reservations.each_with_index do |h,i| %>
+
+					<%= "#{h[:count]} #{h[:status].downcase}" %> 
+					<%= ", " if i<@current_reservations.count-2 %>
+					<%= "and " if i == @current_reservations.count-2 %>
+				<% end %>
+				reservations
+			</div>
+		</div>
 	</div>
 </div>
+
+<%= render 'shared/reservations/book_vehicle', vehicle: @vehicle, res: Reservation.new %>

@@ -21,7 +21,6 @@ describe Vehicle do
          }
   subject { @vehicle }
 
-  it { should respond_to(:reservation_vehicles) }
   it { should respond_to(:reg_no) }
   it { should respond_to(:model) }
   it { should respond_to(:reservations) }
@@ -81,14 +80,19 @@ describe Vehicle do
 
   describe "Reservations:" do
   	before { @vehicle.reg_no = "AXB 1234" if @vehicle.reg_no.nil?
-  		     @r = Reservation.new
-  		     @r.vehicles << @vehicle
+           @make.save
+           @model.save
+           @vehicle.save
+           @client = Client.create(name: "Amy", surname:"Whinehouse",email:"amy@example.com")
+  		     @r = Reservation.new(reservation_code:'123456789', pick_up_date: Date.new(2012, 7, 9), drop_off_date:Date.new(2012,7,19), duration:11)
+  		     @r.vehicle = @vehicle
+           @r.client = @client
   		     @r.save
   	       }
   	context "when present" do 
   		it { should be_valid }
   		specify { @vehicle.reload.reservations.should == [@r] }	
-  		specify { @r.reload.vehicles.should == [@vehicle] }	
+  		specify { @r.reload.vehicle.should == @vehicle }	
   	end
   end
 

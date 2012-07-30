@@ -1,0 +1,41 @@
+<section class="fieldset">
+	<div class="field inline">
+		<%= label_tag "make" do %>
+
+			<%= link_to '#', :class => 'add_make', :title => 'Add new make' do %>
+				<i class="icon-plus-sign"></i>
+			<% end %>
+			<%= link_to '#', :class => 'edit_make', :title => 'Edit selected make' do %>
+				<i class="icon-pencil"></i>
+			<% end %>
+			<%= link_to '#', :class => 'delete_make', :title => 'Delete selected make' do %>
+				<i class="icon-minus-sign"></i>
+			<% end %> Make
+		<% end %>
+		<%= if act == 'new'
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
+			else
+				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
+			end %>
+	</div>
+
+	<div class="field inline <%= act=='new'? 'control-group warning':'' %>">
+		<%= label_tag "model" do %>
+			<%= link_to '#', :class => 'add_model', :hidden => act=='new' ? true : false, :title => 'Add new model' do %>
+				<i class="icon-plus-sign"></i>
+			<% end %>
+			<%= link_to '#', :class => 'edit_model', :hidden => act=='new' ? true : false, :title => 'Edit selected model' do %>
+				<i class="icon-pencil"></i>
+			<% end %>
+			<%= link_to '#', :class => 'delete_model', :hidden => act=='new' ? true : false, :title => 'Delete selected model' do %>
+				<i class="icon-minus-sign"></i>
+			<% end %> Model
+		<% end %>
+		<%= if act == 'new'
+				select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true })
+			else
+				select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 			
+		end %>
+		<label><%= act=='new'? 'Select make to filter models list':'' %></label>
+	</div>
+</section>

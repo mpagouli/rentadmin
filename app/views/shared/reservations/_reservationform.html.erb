@@ -1,0 +1,80 @@
+<div id="res_error_explanation"></div>
+<div class="row">
+	<div class="span11">
+		<%= text_field_tag 'vehicleid', vehicle.id %>
+		<div class="inline">
+			<%= label_tag "veh_reg_no", 'Licence Plate' %>
+			<%= text_field_tag 'veh_reg_no', vehicle.reg_no, :readonly => true %>
+		</div>
+		<div class="inline">
+			<%= label_tag "veh_make", 'Make' %>
+			<%= text_field_tag 'veh_make', vehicle.model.make.make_name, :readonly => true %>
+		</div class="inline">
+		<div>
+			<%= label_tag "veh_model", 'Model' %>
+			<%= text_field_tag 'veh_model', vehicle.model.model_name, :readonly => true %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span11">
+		<div class="inline">
+			<%= label_tag "pick_up_date", 'Pick Up Date' %>
+			<%= text_field_tag 'pick_up_date', nil %>
+		</div>
+		<div class="inline">
+			<%= label_tag "drop_off_date", 'Drop Off Date' %>
+			<%= text_field_tag 'drop_off_date', nil %>
+		</div>
+		<div class="inline">
+			<%= label_tag "duration", 'Duration' %>
+			<%= text_area_tag 'duration', nil, :rows => 2, :cols => 25, :readonly => true %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span11">
+		<div class="inline">
+			<%= label_tag "pick_up_time", 'Pick Up Time' %>
+			<%= text_field_tag 'pick_up_time', nil %>
+		</div>
+		<div class="inline">
+			<%= label_tag "drop_off_time", 'Drop Off Time' %>
+			<%= text_field_tag 'drop_off_time', nil %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="span11">
+		<div class="inline">
+			<%= label_tag "client" do %>
+				<%= link_to '#', :class => 'add_customer', :title => 'Add new customer' do %>
+					<i class="icon-plus-sign"></i>
+				<% end %>
+				<%= link_to '#', :class => 'edit_customer', :title => 'Edit selected customer' do %>
+					<i class="icon-pencil"></i>
+				<% end %>
+				<%= link_to '#', :class => 'delete_customer', :title => 'Delete selected customer' do %>
+					<i class="icon-minus-sign"></i>
+				<% end %> Customer
+			<% end %>
+			<%= if act == 'new'
+					select("client", "id", Client.all.collect { |cl| ["#{cl.name} #{cl.surname}", cl.id]}, { :include_blank => true })
+				else
+					select("client", "id", Client.all.collect { |cl| ["#{cl.name} #{cl.surname}", cl.id]}, { :include_blank => false, :selected => res.client.id } )
+				end %>
+		</div>
+		<div class="inline">
+			<%= label_tag "reservation_code", 'Reservation Code' %>
+			<%= text_field_tag 'reservation_code', nil %>
+		</div>
+		<div class="inline">
+			<%= label_tag "status", 'Status' %>
+			<%= if act == 'new'
+					select("status", "id", ReservationStatus.to_select, { :include_blank => true, :selected => 1 })
+				else
+					select("status", "id", ReservationStatus.to_select, { :include_blank => false, :selected => res.status(:id) })
+				end %>
+		</div>
+	</div>
+</div>
