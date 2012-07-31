@@ -1,5 +1,7 @@
 Rentadmin::Application.routes.draw do
 
+  get "timeline/timeline"
+
   get "reservations/new"
 
   # The priority is based upon order of creation:
@@ -83,6 +85,8 @@ Rentadmin::Application.routes.draw do
   match '/home', to: 'static_pages#home'
   match '/help', to: 'static_pages#help'
 
+  match '/timeline', to: 'timeline#timeline'
+
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -103,7 +107,8 @@ Rentadmin::Application.routes.draw do
   match '/dropmodel', to: 'models#dropmodel'
   match '/book_vehicle', to: 'reservations#book_vehicle'
   match '/show_duration', to: 'reservations#show_duration'
-  match '/check_drop_date', to: 'reservations#check_drop_date'
+  match '/check_booked_dates', to: 'reservations#check_booked_dates'
+  match '/timeline_ajax', to: 'timeline#timeline_ajax'
 
 
 end

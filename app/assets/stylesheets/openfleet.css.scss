@@ -444,3 +444,11 @@ div.model-index-image{
     font-size:13px;
   }
 }
+
+
+/* Date Picker */
+td.bookedDate .ui-state-default, td.bookedDate.ui-widget-content .ui-state-default, td.bookedDate.ui-widget-header .ui-state-default {
+  background: none !important;
+  background-color:#000000!important;
+  color:#ffffff!important;
+}

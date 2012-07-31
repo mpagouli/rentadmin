@@ -24,7 +24,7 @@ class Reservation < ActiveRecord::Base
   attr_accessible :duration, :drop_off_date, :pick_up_date, :reservation_code, :status
   enumerate :status, :with => ReservationStatus
   before_save do |reservation|
-    reservation.duration = drop_off_date - pick_up_date
+    reservation.duration = drop_off_date - pick_up_date #duration is saved in seconds
   end
   #has_many :reservation_vehicles, :dependent => :restrict
   #has_many :vehicles, :through => :reservation_vehicles, :source => :vehicle

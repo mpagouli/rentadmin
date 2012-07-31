@@ -19,7 +19,7 @@ describe "MenuPages" do
     let(:page_title) { 'Operation' }
     it_should_behave_like "all menu pages"
     describe "Navigation bar links" do
-    	it { should have_link "Timeline", href: '#' }
+    	it { should have_link "Timeline", href: timeline_path }
     	it { should have_link "Reports", href: '#' }
     	it { should have_link "Bookings", href: '#' }
     	it { should have_link "Home", href: home_path }

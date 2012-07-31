@@ -41,9 +41,9 @@ FactoryGirl.define do
 
   factory :reservation do
     sequence(:reservation_code) { |n| "ResCode #{n}" }
-    sequence(:pick_up_date) { |n| Date.today + n }
-    sequence(:drop_off_date) { |n| Date.today + n + (n % 10) + 1 }
-    sequence(:duration) { |n| (Date.today + n + (n % 10) + 1) - (Date.today + n) }
+    sequence(:pick_up_date) { |n| Date.today.to_time_in_current_zone + n }
+    sequence(:drop_off_date) { |n| Date.today.to_time_in_current_zone + n + (n % 10) + 1 }
+    sequence(:duration) { |n| (Date.today.to_time_in_current_zone + n + (n % 10) + 1) - (Date.today.to_time_in_current_zone + n) }
     vehicle
     client
   end 

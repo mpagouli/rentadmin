@@ -99,11 +99,12 @@ def make_reservations
   clients = Client.all(limit: 20)
   vehicles = Vehicle.all(limit: 20)
   clients[0..9].each_with_index do |client,i|
-      counter = 3
+      daysecs = 24*60*60;
+      counter = 3 * daysecs;
       status = 'PENDING'
       2.times do |n|
-        stD = Date.today + counter
-        eD = stD + counter + 2
+        stD = Date.today.to_time_in_current_zone + counter
+        eD = stD + counter + 2 * daysecs
         duration = eD -stD
         resCode = rand(12**12).to_s
         while resCode.to_s.length != 12
@@ -117,11 +118,12 @@ def make_reservations
       end
   end
   clients[10..19].each_with_index do |client,i|
-      counter = 5
+      daysecs = 24*60*60;
+      counter = -50 * daysecs
       status = 'CANCELLED'
       2.times do |n|
-        stD = Date.today + counter
-        eD = stD + counter + 2
+        stD = Date.today.to_time_in_current_zone + counter
+        eD = stD + 5 * daysecs
         duration = eD - stD
         resCode = rand(12**12).to_s
         while resCode.to_s.length != 12
@@ -131,7 +133,7 @@ def make_reservations
         res.client = client
         res.save!
         counter += 30
-        status = 'CONFIRMED'
+        status = 'COMPLETED'
       end
   end
 end

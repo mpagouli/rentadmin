@@ -379,30 +379,60 @@ $(document).ready(function() {
 
 
 	//Book Vehicle
-	if( $("#book_vehicle") !== undefined ){ 
+	if( $("#book_vehicle") !== undefined && $("input#vehicleid").attr('value') !== undefined){ 
 		
 		//Date pickers
-		$("#drop_off_date, #pick_up_date").datetimepicker({ 
-			dateFormat: "dd/mm/yy",  
-        	beforeShow: function(a) {
-        		var b = new Date();  
-    			var c = new Date(b.getFullYear(), b.getMonth(), b.getDate());  
-    			if (a.id == 'drop_off_date') {  
-        			if ($('#pick_up_date').datepicker('getDate') != null) {  
-            			c = $('#pick_up_date').datepicker('getDate');  
-       			 	}  
-    			}  
-    			return {  
-        			minDate: c  
-    			}  
-        	}	
+		$.ajax({
+			url: '/check_booked_dates',
+			data: 'vehicleid='+$("input#vehicleid").attr('value'),
+			dataType: 'json',
+			success: function(data) { 
+				if(data.success){ 
+				   var bookedDates = data.bookedDates;
+
+				   $("#drop_off_date, #pick_up_date").datetimepicker({ 
+						dateFormat: "dd/mm/yy",  
+        				beforeShow: function(a) {
+        					var b = new Date();  
+    						var c = new Date(b.getFullYear(), b.getMonth(), b.getDate());  
+    						if (a.id == 'drop_off_date') {  
+        						if ($('#pick_up_date').datepicker('getDate') != null) {  
+            						c = $('#pick_up_date').datepicker('getDate');  
+       			 				}  
+    						}  
+    						return {  
+        						minDate: c  
+    						}  
+        				},
+        				onSelect: function(dateText, inst) {
+							var from, to, diff, mins, hours, days;
+							$.ajax({
+								url: '/show_duration',
+								data: 'from='+$("input#pick_up_date").attr('value')+'&to='+$("input#drop_off_date").attr('value'),
+								dataType: 'json',
+								success: function(data) { 
+							  		if(data.duration!=''){ 
+							  			$("textarea#duration").attr('value',data.duration);
+							  		}
+							  		else{
+							  			$("textarea#duration").attr('value','There was a problem with defining the duration');
+							  		}
+								}
+							});
+						},
+						beforeShowDay: function(date){ 
+							if(bookedDates.indexOf($.datepicker.formatDate('yy-mm-dd', date)) != -1)
+								return [false,"bookedDate","test"]
+							else
+								return [true,"",""]
+						}	
+					});
+				}
+			}
 		});
-		/*$("#pick_up_date").datepicker({ 
-			dateFormat: "dd/mm/yy",
-			onSelect: function(dateText, inst) { 
-				$("#drop_off_date").datepicker()
-			} 
-			beforeShowDay: function(date) { alert('xox')
+		
+		/*function befShow(date){
+			alert('xox')
 				$.ajax({
 					url: '/check_drop_date',
 					data: 'dat='+$.datepicker.formatDate('dd/mm/yy', date)+'&vehicleid='+$("input#vehicleid").attr('value'),
@@ -416,30 +446,9 @@ $(document).ready(function() {
 					  }
 					}
 				});
-			}
-		});*/
-		$("#drop_off_date, #pick_up_date").change(function(e){
-			var from, to, diff, mins, hours, days;
-			/*to = $("#drop_off_date").datepicker('getDate');
-			from = $("#pick_up_date").datepicker('getDate');
-			diff = new Date(to - from);
-			mins = diff/1000/60;
-			hours = mins/60;
-			days = hours/24;*/
-			$.ajax({
-				url: '/show_duration',
-				data: 'from='+$("input#pick_up_date").attr('value')+'&to='+$("input#drop_off_date").attr('value'),
-				dataType: 'json',
-				success: function(data) { 
-				  if(data.duration!=''){ 
-				  	$("textarea#duration").attr('value',data.duration);
-				  }
-				  else{
-				  	$("textarea#duration").attr('value','There was a problem with defining the duration');
-				  }
-				}
-			});
-		});
+		}*/
+
+		
 
 		$("input#vehicleid").hide();
         $("#book_vehicle_dialog").dialog({ 
