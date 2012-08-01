@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-	if($("div#openrent_timeline") !== undefined){
+    var page_title = $(this).attr('title');
+
+	if($(this).attr('title').indexOf('Timeline') !== -1){
 
 		$("input#loaded").hide();
 		$.ajax({

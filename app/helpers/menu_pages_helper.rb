@@ -63,4 +63,8 @@ module MenuPagesHelper
     select_menu('admin') unless menu_selected?
   end
 
+  def select_operation_menu
+    select_menu('operation') unless menu_selected?
+  end
+
 end

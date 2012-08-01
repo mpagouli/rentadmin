@@ -113,7 +113,7 @@ def make_reservations
         res = vehicles[i].reservations.new(pick_up_date: stD, duration: duration, drop_off_date: eD, reservation_code: resCode, status: status)
         res.client = client
         res.save!
-        counter += 30
+        counter += 30 * daysecs;
         status = 'CONFIRMED'
       end
   end
@@ -132,7 +132,7 @@ def make_reservations
         res = vehicles[i].reservations.new(pick_up_date: stD, duration: duration, drop_off_date: eD, reservation_code: resCode, status: status)
         res.client = client
         res.save!
-        counter += 30
+        counter += 30 * daysecs
         status = 'COMPLETED'
       end
   end

@@ -1,8 +1,8 @@
 class TimelineController < ApplicationController
 
   before_filter :signed_in_user
-  before_filter :admin_user
-  #before_filter :select_admin_menu
+  #before_filter :admin_user
+  before_filter :select_operation_menu
 
 
   def timeline

@@ -2,8 +2,8 @@ class ReservationsController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
   before_filter :signed_in_user
-  before_filter :admin_user
-  before_filter :select_admin_menu
+  #before_filter :admin_user
+  #before_filter :select_admin_menu
 
   def new
   end
