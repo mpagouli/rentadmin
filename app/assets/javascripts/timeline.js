@@ -12,7 +12,7 @@ $(document).ready(function() {
 			success: function(data) { 
 				//var vehicles, reservations, startD;
 				//vehicles = data.vehicles;
-				//reservations = data.res;
+				reservations = data.res;
 				//startD = data.dat;
 
 				var new_elems = []
@@ -22,11 +22,12 @@ $(document).ready(function() {
 						'id': el.id,
 						'startDate': Date.parseExact(el.startDate,'dd/MM/yyyy HH:mm:ss'),
 						'endDate': Date.parseExact(el.endDate,'dd/MM/yyyy HH:mm:ss'),
-						'label': el.label,
-						'index': el.index
+						'html': el.html,
+						'index': el.index,
+                        'helper': { status: el.helper.status }
 					});
 				}
-				alert(new_elems.length);
+
 				$("div#openrent_timeline").timeline({
         			width: '100%',
         			height:'100%',
@@ -36,29 +37,40 @@ $(document).ready(function() {
 	    			},
         			legend_width: { number:130 , unit:'px' },
         			//theme: 'blueskip',
-        			elements: new_elems
+        			elements: new_elems,
+                    elementStyle: defineElemColor
         		});	
 
         		var rowHeight = $("div#openrent_timeline").data("timeline").options.row_height;
         		$("div#openrent_timeline").data("timeline").setOption('row_height', { number: rowHeight.number*1.1, unit: rowHeight.unit } );
- 	
+ 	  
 			}
 		});
+
+        var defineElemColor = function(time_elem){
+                    
+            switch(time_elem.helper.status){
+                case 'COMPLETED': 
+                    return 'all_elements completed';
+                case 'CANCELLED':
+                    return 'all_elements cancelled';
+                case 'CONFIRMED':
+                    return 'all_elements confirmed';
+                case 'PENDING':
+                    return 'all_elements pending';
+                case 'RUNNING':
+                    return 'all_elements running';
+                return 'all_elements';
+            }
+        };
+
 
 	}
 
 
-    /*var defineElemColor = function(time_elem){
-        var style_class = 'confirmed';
-        if(time_elem.id === 4 ) { style_class = 'departed'; }
-        if(time_elem.id === 2 ) { style_class = 'cancelled'; }
-        if(time_elem.id === 1 ) { style_class = 'departed'; }
-        if(time_elem.id === 5 ) { style_class = 'departed'; }
-        if(time_elem.id === 6 ) { style_class = 'pending'; }
-        return style_class;
-    };
+    
 
-    var showElemInfo = function(elem){
+    /*var showElemInfo = function(elem){
         var dialog = $('<div></div>')
         .addClass("ui-widget ui-widget-content ui-corner-all")
         .css({ 'width': '100px', 'height': '200px', 'padding': '10px' })
@@ -141,7 +153,7 @@ $(document).ready(function() {
     bar.timeline({
         //unit_width: { number:120, unit:'px' },
 
-        //elementStyle: defineElemColor,
+        ,
         //legendStyleText: defineLegend,
         elementClicked: showElemInfo,
         elementDBLClicked: showElemInfo,

@@ -15,6 +15,11 @@ div#timeline_container{
 	}
 }
 
+.all_elements{
+    text-align:left;
+    padding-left:10px;
+    padding-right:10px;
+}
 .cancelled{
 	background:red;
 	border-radius : 7px;
@@ -26,18 +31,47 @@ div#timeline_container{
 .pending{
 	background:yellow;
 	border-radius : 7px;
+    color:black;
 }
-.departed{
-	background:gray;
-	border-radius : 7px;
+.completed{
+    background:gray;
+    border-radius : 7px;
+}
+.running{
+    background:orange;
+    border-radius : 7px;
 }
 
-.leg{
+.res_pickup_time{
+    float:left;
+    text-align:left;
+    width:20%;
+    &.only{
+        width:50%;
+    }
+}
+.res_customer{
+    float:left;
+    width:60%;
+    height:100%;
+    overflow:hidden;
+    text-align:center;
+    font-weight:bold;
+}
+.res_dropoff_time{
+    width:20%;
+    float:right;
+    text-align:right;
+    &.only{
+        width:50%;
+    }
+}
+
+/*.leg{
 	background:lightblue;
 }
 
 .myimg{
-	/*border:2px dotted;*/
 	padding-top:5px;
 }
 
@@ -53,3 +87,5 @@ div#timeline_container{
     background-image: -ms-linear-gradient(0, lightblue 50%, rgba(230, 230, 230, .5) 50%);
     background-image: -o-linear-gradient(0, lightblue 50%, rgba(230, 230, 230, .5) 50%);
 }
+
+*/

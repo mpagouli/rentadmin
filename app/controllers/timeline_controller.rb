@@ -23,12 +23,22 @@ class TimelineController < ApplicationController
   	@reservations = Reservation.all
   	elements = []
   	@reservations.each do |r|
-  		element = { :id => r.reservation_code,
+      #return render :text => "r code is #{r.reservation_code} and its status is #{ReservationStatus[r.status]}"
+  		elem_html = "<div class='res_pickup_time'>#{r.pick_up_date.in_time_zone(Time.zone).strftime('%H:%M')}</div> <div class='res_customer'>#{r.client.name} #{r.client.surname}</div> <div class='res_dropoff_time'>#{r.drop_off_date.in_time_zone(Time.zone).strftime('%H:%M')}</div>"
+      if r.duration < 24 * 60 * 60 #For reservations for less that 24 hours
+        elem_html = '...'
+      elsif r.duration >= ( 24 + 12 ) * 60 * 60 && r.duration <= 48 * 60 * 60 
+      #For reservations of 36 to 48 hours
+        elem_html ="<div class='res_pickup_time only'>#{r.pick_up_date.in_time_zone(Time.zone).strftime('%H:%M')}</div> <div class='res_dropoff_time only'>#{r.drop_off_date.in_time_zone(Time.zone).strftime('%H:%M')}</div>"
+      end
+
+      element = { :id => r.reservation_code,
   					:startDate => r.pick_up_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M:%S'),
   					:endDate => r.drop_off_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M:%S'),
-  					:label => "#{r.client.name} #{r.client.surname}",
-  					:index => "#{r.vehicle.model.make.make_name} #{r.vehicle.model.model_name} (#{r.vehicle.reg_no})" 
-  				  }
+  					:html => elem_html,
+  					:index => "#{r.vehicle.model.make.make_name} #{r.vehicle.model.model_name} (#{r.vehicle.reg_no})", 
+  				  :helper => { :status => "#{ReservationStatus[r.status]}" }
+            }
   		elements.push(element)
   	end
   	

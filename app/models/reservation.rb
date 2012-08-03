@@ -26,6 +26,9 @@ class Reservation < ActiveRecord::Base
   before_save do |reservation|
     reservation.duration = drop_off_date - pick_up_date #duration is saved in seconds
   end
+  before_update do |reservation|
+    reservation.duration = drop_off_date - pick_up_date #duration is saved in seconds
+  end
   #has_many :reservation_vehicles, :dependent => :restrict
   #has_many :vehicles, :through => :reservation_vehicles, :source => :vehicle
   #validates_associated :vehicles
