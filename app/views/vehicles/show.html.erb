@@ -13,6 +13,7 @@
 			<%= link_to "edit", edit_vehicle_path(@vehicle) %> | 
 			<%= link_to "delete", @vehicle, method: :delete, data: { confirm: "Are you sure?" } %>
 
+			<% if @current_reservations.count != 0 %>
 			<div>
 				Vehicle has: 
 				<%  @current_reservations.each_with_index do |h,i| %>
@@ -23,6 +24,7 @@
 				<% end %>
 				reservations
 			</div>
+			<% end %>
 		</div>
 	</div>
 </div>

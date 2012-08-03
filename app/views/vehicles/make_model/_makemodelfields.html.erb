@@ -12,14 +12,14 @@
 				<i class="icon-minus-sign"></i>
 			<% end %> Make
 		<% end %>
-		<%= if act == 'new'
+		<%= if act == 'new' && vehicle.model.nil?
 				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name"), { :include_blank => true })
 			else
 				select("make", "id", options_from_collection_for_select(Make.all, "id", "make_name", vehicle.model.make.id))
 			end %>
 	</div>
 
-	<div class="field inline <%= act=='new'? 'control-group warning':'' %>">
+	<div class="field inline <%= act=='new' && vehicle.model.nil? ? 'control-group warning':'' %>">
 		<%= label_tag "model" do %>
 			<%= link_to '#', :class => 'add_model', :hidden => act=='new' ? true : false, :title => 'Add new model' do %>
 				<i class="icon-plus-sign"></i>
@@ -31,11 +31,11 @@
 				<i class="icon-minus-sign"></i>
 			<% end %> Model
 		<% end %>
-		<%= if act == 'new'
+		<%= if act == 'new' && vehicle.model.nil?
 				select("model", "id", options_from_collection_for_select([], "id", "model_name"), { :include_blank => true })
 			else
 				select("model", "id", options_from_collection_for_select(Model.where("make_id = ?", vehicle.model.make.id), "id", "model_name", vehicle.model.id), { :include_blank => true }) 			
 		end %>
-		<label><%= act=='new'? 'Select make to filter models list':'' %></label>
+		<label><%= act=='new' && vehicle.model.nil? ? 'Select make to filter models list':'' %></label>
 	</div>
 </section>

@@ -18,6 +18,7 @@ class ReservationStatus < ActiveEnum::Base
   value :id => 3, :name => 'CANCELLED'
   value :id => 4, :name => 'RUNNING'
   value :id => 5, :name => 'COMPLETED'
+  value :id => 6, :name => 'DELETED'
 end
 
 class Reservation < ActiveRecord::Base

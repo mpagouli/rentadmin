@@ -1,8 +1,8 @@
 Rentadmin::Application.routes.draw do
 
-  get "timeline/timeline"
+  get "groups/new"
 
-  get "reservations/new"
+  get "clients/new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -36,6 +36,7 @@ Rentadmin::Application.routes.draw do
   #     resource :seller
   #   end
   resources :users
+  resources :clients
   resources :makes do
     resources :models
   end
@@ -48,6 +49,7 @@ Rentadmin::Application.routes.draw do
   end
   resources :reservations do
     resources :vehicles
+    resources :clients
   end
   resources :vehicles do
     resources :reservations

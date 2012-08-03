@@ -16,11 +16,12 @@ describe Client do
 
 	# Runs before each it example. When using before block in one example 
     # we add commands to its before block that contains the command below
-	before { @client = Client.new(name: "Amy", surname:"Whinehouse",email:"amy@example.com") }
+	before { @client = Client.new(name: "Amy", surname:"Whinehouse",email:"amy@example.com", identity_number: "ID 7230089") }
 	subject { @client }
 
 	it { should respond_to(:name) }
 	it { should respond_to(:email) }
+	it { should respond_to(:identity_number) }
 	it { should respond_to(:surname) }
 	it { should respond_to(:reservations) }
 
@@ -47,6 +48,18 @@ describe Client do
 			it { should_not be_valid }
 		end
 	end
+
+	describe "Identity Number:" do
+		context "blank" do
+			before { @client.identity_number = " " }
+			it { should_not be_valid }
+		end
+		context "nil" do
+			before { @client.identity_number = nil }
+			it { should_not be_valid }
+		end
+	end
+
 
 	describe "Email:" do
 		context "blank" do

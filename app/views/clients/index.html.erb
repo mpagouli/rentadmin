@@ -1,0 +1,25 @@
+<%= provide(:title,'Customers') %>
+<div class="main-content pagination-center">
+	<div class="row">
+		<%= render 'shared/flash_messages' %>
+		<div class="span11">
+			<div class="right-button">
+				<%= button_to "New Customer", :action => "new" %>
+			</div>
+			<%= will_paginate %>
+			<div class="customers">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>Identity</th><th>Name</th><th>Surname</th><th></th><th></th><th></th>
+					</tr>
+					</thead>
+					<tbody>
+				   		<%= render @clients %>
+				   	</tbody>
+				</table>
+			</div>
+			<%= will_paginate %>
+		</div>
+	</div>
+</div>

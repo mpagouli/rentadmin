@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730125849) do
+ActiveRecord::Schema.define(:version => 20120803134654) do
 
   create_table "asset_categories", :force => true do |t|
     t.string   "name"
@@ -37,9 +37,12 @@ ActiveRecord::Schema.define(:version => 20120730125849) do
     t.string   "name"
     t.string   "surname"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "identity_number"
   end
+
+  add_index "clients", ["identity_number"], :name => "index_clients_on_identity_number", :unique => true
 
   create_table "groups", :force => true do |t|
     t.datetime "created_at",                  :null => false

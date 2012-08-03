@@ -41,7 +41,7 @@ $(document).ready(function() {
 		//New Make Dialog..........................................................
 		$(".add_make").click(function(e){
 			e.preventDefault();
-			$("#make_new_dialog .center-button input").click(function(ee){
+			$("#make_new_dialog .center-button button").click(function(ee){
 				$.ajax({
 				  url: '/savemake',
 				  data: 'make_name='+$("input#make_name").attr('value')+'&make_description='+$("textarea#make_description").attr('value'),
@@ -69,7 +69,7 @@ $(document).ready(function() {
 				});
 			});
 			$("input#makeid").attr('value',$("#make_id").find(":selected").attr('value'));
-			$("#make_new_dialog .center-button input").attr('value','Insert Make');
+			$("#make_new_dialog .center-button button").attr('value','Insert Make');
 			$("input#make_name").attr('value','');
 			$("textarea#make_description").attr('value','');
 			$("#make_new_dialog").dialog('option','title','New Make');
@@ -86,7 +86,7 @@ $(document).ready(function() {
 				dataType: 'json',
 				success: function(data) { 
 				 if(data.success){
-				 	$("#make_new_dialog .center-button input").attr('value','Save changes');
+				 	$("#make_new_dialog .center-button button").attr('value','Save changes');
 				 	$("input#makeid").attr('value',data.make.id);
 				  	$("input#make_name").attr('value',data.make.make_name);
 					$("textarea#make_description").attr('value',data.make.description);
@@ -101,7 +101,7 @@ $(document).ready(function() {
 				  }
 				 }
 			});
-			$("#make_new_dialog .center-button input").click(function(ee){
+			$("#make_new_dialog .center-button button").click(function(ee){
 				ee.preventDefault();
 				$.ajax({
 				  url: '/makemodify',
@@ -232,7 +232,7 @@ $(document).ready(function() {
         });
 		$(".add_model").click(function(e){
 			e.preventDefault();
-			$("#model_new_dialog .center-button input").click(function(ee){
+			$("#model_new_dialog .center-button button").click(function(ee){
 				ee.preventDefault();
 				$.ajax({
 				  url: '/savemodel',
@@ -261,7 +261,7 @@ $(document).ready(function() {
 				});
 			});
 			$("input#makeid").attr('value',$("#make_id").find(":selected").attr('value'));
-			$("#model_new_dialog .center-button input").attr('value','Insert Model');
+			$("#model_new_dialog .center-button button").attr('value','Insert Model');
 			$("input#modelid").attr('value','');
 			$("input#model_name").attr('value','');
 			$("textarea#model_description").attr('value','');
@@ -280,7 +280,7 @@ $(document).ready(function() {
 				dataType: 'json',
 				success: function(data) { 
 				 if(data.success){
-				 	$("#model_new_dialog .center-button input").attr('value','Save changes');
+				 	$("#model_new_dialog .center-button button").attr('value','Save changes');
 				 	$("input#modelid").attr('value',data.model.id);
 				  	$("input#model_name").attr('value',data.model.model_name);
 					$("textarea#model_description").attr('value',data.model.description);
@@ -295,7 +295,7 @@ $(document).ready(function() {
 				  }
 				 }
 			});
-			$("#model_new_dialog .center-button input").click(function(ee){
+			$("#model_new_dialog .center-button button").click(function(ee){
 				ee.preventDefault();
 				$.ajax({
 				  url: '/modelmodify',
@@ -469,7 +469,7 @@ $(document).ready(function() {
         });
 		$("#book_vehicle").click(function(e){ 
 			e.preventDefault();
-			$("#book_vehicle_dialog .center-button input").click(function(ee){
+			$("#book_vehicle_dialog .center-button button").click(function(ee){
 				ee.preventDefault();
 				var datastring = 'client_id='+$("select#client_id").attr('value')+
 								 '&vehicleid='+$("input#vehicleid").attr('value')+
@@ -499,7 +499,7 @@ $(document).ready(function() {
 				});
 			});
 			//$("input#vehicleid").attr('value',$("#sel_vehicle_id").attr('value'));
-			$("#book_vehicle_dialog .center-button input").attr('value','Make Reservation');
+			$("#book_vehicle_dialog .center-button button").attr('value','Make Reservation');
 			//$("input#resid").attr('value','');
 			//$("input#model_name").attr('value','');
 			//$("textarea#model_description").attr('value','');

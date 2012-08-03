@@ -1,12 +1,12 @@
 <div id="make_new_dialog" title="New Make">
 	<div class="row">
 	  <div class="span3">
-	    <%= form_tag "#" do %>
+	    <%# form_tag "#" do %>
 	      <%= render :partial => 'vehicles/make_model/makeform', :locals => { make: make } %>
 	      <div class="center-button">
-			<%= submit_tag "Insert Make", class: "btn btn-large btn-primary" %>
+			<%= button_tag "Insert Make", class: "btn btn-large btn-primary" %>
 		  </div>
-	    <% end %>
+	    <%# end %>
 	  </div>
 	</div>
 </div>

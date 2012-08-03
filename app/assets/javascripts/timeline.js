@@ -60,6 +60,8 @@ $(document).ready(function() {
                     return 'all_elements pending';
                 case 'RUNNING':
                     return 'all_elements running';
+                case 'DELETED':
+                    return 'all_elements deleted';
                 return 'all_elements';
             }
         };

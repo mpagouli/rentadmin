@@ -1,3 +1,6 @@
 <li> <%= link_to "Timeline", timeline_path %> </li>
 <li> <%= link_to "Reports", '#' %> </li>
-<li> <%= link_to "Bookings", '#' %> </li>
+<%= render 'shared/nav/dropdown', 
+		dropdown_selected: selected_reservations? , 
+		dropdown_name: "Reservations", 
+		dropdown_items: [{ name: 'reservation_new', link: new_reservation_path, text: 'New Reservation'}, {name: 'reservation_list', link: reservations_path, text: 'Reservation List'}] %>

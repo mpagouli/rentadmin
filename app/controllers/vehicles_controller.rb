@@ -22,6 +22,7 @@ class VehiclesController < ApplicationController
 		@make = params[:make][:id].blank? ? nil : Make.find(params[:make][:id])
 		@model = params[:model][:id].blank? ? nil : Model.find(params[:model][:id])
 		@vehicle = @model.nil? ? Vehicle.new(:reg_no => params[:reg_no]) : @model.vehicles.build(:reg_no => params[:reg_no])
+		@vehicle.model = @model
 		if @vehicle.save
 		    flash[:success] = "Vehicle inserted successfully!"
 		    redirect_to @vehicle
@@ -64,7 +65,7 @@ class VehiclesController < ApplicationController
 	def destroy
 		Vehicle.find(params[:id]).destroy
     	flash[:success] = "Vehicle destroyed."
-		redirect_to vehicles_path
+		redirect_to :back
 	end
 
 	#Ajax

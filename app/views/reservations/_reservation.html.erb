@@ -1,0 +1,12 @@
+<tr>
+
+  <td><%= link_to "#{reservation.reservation_code}", reservation %></td>
+  <td><%= reservation.vehicle.reg_no %></td>
+  <td><%= "#{reservation.client.name} #{reservation.client.surname}" %></td>
+  <td><%= reservation.pick_up_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M%p') %></td>
+  <td><%= reservation.drop_off_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M%p') %></td>
+  <td><%= link_to "show", reservation %></td>
+  <td><%= link_to "edit", edit_reservation_path(reservation) %></td>
+  <td><%= link_to "delete", reservation, method: :delete, data: { confirm: "Are you sure?" }  %></td>
+  
+</tr>

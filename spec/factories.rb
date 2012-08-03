@@ -36,6 +36,7 @@ FactoryGirl.define do
   factory :client do
     sequence(:name)  { |n| "Customer #{n}" }
     sequence(:surname)  { |n| "Surname #{n}" }
+    sequence(:identity_number)  { |n| "ID NUM #{n}" }
     sequence(:email) { |n| "customer_#{n}@example.com"}   
   end
 

@@ -83,7 +83,7 @@ describe Vehicle do
            @make.save
            @model.save
            @vehicle.save
-           @client = Client.create(name: "Amy", surname:"Whinehouse",email:"amy@example.com")
+           @client = Client.create(name: "Amy", surname:"Whinehouse",email:"amy@example.com", identity_number: "ID 7878677767")
   		     @r = Reservation.new(reservation_code:'123456789', pick_up_date: Date.new(2012, 7, 9), drop_off_date:Date.new(2012,7,19), duration:11)
   		     @r.vehicle = @vehicle
            @r.client = @client

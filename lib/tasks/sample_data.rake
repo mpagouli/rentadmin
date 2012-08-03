@@ -86,12 +86,14 @@ end
 def make_clients
   40.times do |n|
     fullname = Faker::Name.name
+    ident = "ID#{n}#{n}#{n}#{n}#{n}#{n}#{n}"
     name = fullname.split(" ")[0]
     surname = fullname.split(" ")[1]
     email = "cust_example#{n+1}@example.com"
     Client.create!(name: name, 
                    surname: surname,
-                   email: email)
+                   email: email,
+                   identity_number: ident)
   end
 end
 

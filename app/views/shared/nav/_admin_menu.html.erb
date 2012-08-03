@@ -1,6 +1,11 @@
 <li> <%= link_to "General", '#' %> </li>
-<%= render 'shared/nav/vehicles/dropdown' %>
-<li> <%= link_to "Customers", '#' %> </li>
-<li> <%= link_to "Groups", '#' %> </li>
+<%= render 'shared/nav/dropdown', 
+		dropdown_selected: selected_vehicles? , 
+		dropdown_name: "Vehicles", 
+		dropdown_items: [{ name: 'vehicle_new', link: new_vehicle_path, text: 'New Vehicle'}, {name: 'vehicle_list', link: vehicles_path, text: 'Vehicle List'}] %>
+<%= render 'shared/nav/dropdown', 
+		dropdown_selected: selected_clients? , 
+		dropdown_name: "Customers", 
+		dropdown_items: [{ name: 'client_new', link: new_client_path, text: 'New Customer'}, {name: 'client_list', link: clients_path, text: 'Customer List'}] %>
 <li> <%= link_to "Rates", '#' %> </li>
 <li> <%= link_to "Users", users_path %> </li>

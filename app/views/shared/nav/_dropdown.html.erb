@@ -1,0 +1,17 @@
+<li <%= dropdown_selected ? 'id=item_selected' : '' %>  class="dropdown"> 
+  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+    <%= dropdown_name %> <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <% dropdown_items.each_with_index do |item,i| %>
+
+      <li <%= selected_item?(item[:name]) ? 'id=sub_selected' : '' %> >
+        <%= link_to item[:text], item[:link] %>
+      </li>
+      <% if i < dropdown_items.count - 1 %>
+        <li class="divider"></li>
+      <% end %>
+
+    <% end %>
+  </ul>
+</li>

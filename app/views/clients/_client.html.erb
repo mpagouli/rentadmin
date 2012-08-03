@@ -1,0 +1,10 @@
+<tr>
+
+  <td><%= link_to "#{client.identity_number}", client %></td>
+  <td><%= client.name %></td>
+  <td><%= client.surname %></td>
+  <td><%= link_to "show", client %></td>
+  <td><%= link_to "edit", edit_client_path(client) %></td>
+  <td><%= link_to "delete", client, method: :delete, data: { confirm: "Are you sure?" }  %></td>
+  
+</tr>

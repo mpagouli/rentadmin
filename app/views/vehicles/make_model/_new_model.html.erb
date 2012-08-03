@@ -1,12 +1,12 @@
 <div id="model_new_dialog" title="New Model">
 	<div class="row">
 	  <div class="span3">
-	    <%= form_tag "#" do %>
+	    <%# form_tag "#" do %>
 	      <%= render :partial => 'vehicles/make_model/modelform', :locals => { model: model } %>
 	      <div class="center-button">
-			<%= submit_tag "Insert Model", class: "btn btn-large btn-primary" %>
+			<%= button_tag "Insert Model", class: "btn btn-large btn-primary" %>
 		  </div>
-	    <% end %>
+	    <%# end %>
 	  </div>
 	</div>
 </div>

@@ -73,14 +73,14 @@ describe "VehiclePages" do
         it "should contain error message for license plate number" do
           should have_selector('li', text:"Plate number is required")
         end
-        it "should contain error message for license plate number" do
+        it "should contain error message for model" do
           should have_selector('li', text:"Model is required")
         end
       end
     end
     #debugger
-    it { should have_selector('a#add_make') }
-    it { should have_selector('a#add_model') }
+    it { should have_selector('a.add_make') }
+    it { should have_selector('a.add_model') }
     it { should have_selector('div#make_new_dialog') }
     it { should have_selector('div#model_new_dialog') }
     it { should have_selector('select#make_id') }

@@ -50,21 +50,33 @@ module MenuPagesHelper
   def selected_item?(menu_item)
     menu_item == item_selected
   end
-  def selected_vehicle?
+  def selected_vehicles?
     vehicle_items = ['vehicle_new','vehicle_list']
     vehicle_items.include?(item_selected)
   end
-  def selected_models?
-    model_items = ['model_new','model_list']
+  #def selected_models?
+  #  model_items = ['model_new','model_list']
+  #  model_items.include?(item_selected)
+  #end
+  def selected_reservations?
+    model_items = ['reservation_new','reservation_list']
+    model_items.include?(item_selected)
+  end
+  def selected_clients?
+    model_items = ['client_new','client_list']
     model_items.include?(item_selected)
   end
 
   def select_admin_menu
-    select_menu('admin') unless menu_selected?
+    select_menu('admin') unless selected_menu?('admin')
   end
 
   def select_operation_menu
-    select_menu('operation') unless menu_selected?
+    select_menu('operation') unless selected_menu?('operation')
+  end
+
+  def select_board_menu
+    select_menu('board') unless selected_menu?('board')
   end
 
 end

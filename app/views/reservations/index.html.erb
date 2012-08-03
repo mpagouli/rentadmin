@@ -1,0 +1,25 @@
+<%= provide(:title,'Reservations') %>
+<div class="main-content pagination-center">
+	<div class="row">
+		<%= render 'shared/flash_messages' %>
+		<div class="span11">
+			<div class="right-button">
+				<%= button_to "New Reservation", :action => "new" %>
+			</div>
+			<%= will_paginate %>
+			<div class="reservations">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>Code</th><th>Vehicle</th><th>Client</th><th>Pick Up</th><th>Drop Off</th><th></th><th></th><th></th>
+					</tr>
+					</thead>
+					<tbody>
+				   		<%= render @reservations %>
+				   	</tbody>
+				</table>
+			</div>
+			<%= will_paginate %>
+		</div>
+	</div>
+</div>

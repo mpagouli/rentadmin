@@ -377,7 +377,7 @@ div#msg_dialog, div#confirm_dialog{
     margin-top:5px;
   }
 }
-div#book_vehicle_dialog{
+div#book_vehicle_dialog, div#new_reservation{
   overflow:hidden;
   .center-button{
     margin-top:5px;
@@ -452,3 +452,9 @@ td.bookedDate .ui-state-default, td.bookedDate.ui-widget-content .ui-state-defau
   background-color:#000000!important;
   color:#ffffff!important;
 }
+
+
+#ui-datepicker-div{
+  z-index: 1003!important; /* must be > than popup editor (950) */
+}
+

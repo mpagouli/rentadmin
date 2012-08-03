@@ -21,7 +21,7 @@ describe "MenuPages" do
     describe "Navigation bar links" do
     	it { should have_link "Timeline", href: timeline_path }
     	it { should have_link "Reports", href: '#' }
-    	it { should have_link "Bookings", href: '#' }
+    	it { should have_link "Reservations", href: '#' }
     	it { should have_link "Home", href: home_path }
     	it { should have_link "Sign out", href: signout_path }
     	it { should have_link "Help", href: '#' }
@@ -58,7 +58,7 @@ describe "MenuPages" do
     it_should_behave_like "all menu pages"
     describe "Navigation bar links" do
     	it { should have_link "General", href: '#' }
-    	it { should have_link "Groups", href: '#' }
+    	#it { should have_link "Groups", href: '#' }
     	it { should have_link "Vehicles", href: '#' }
       #it { should have_link "Models", href: '#' }
     	it { should have_link "Customers", href: '#' }

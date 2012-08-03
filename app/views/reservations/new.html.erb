@@ -1,2 +1,15 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+<%= provide(:title,'New Reservation') %>
+<div id="new_reservation"class="main-content">
+	<h2><%= yield(:title) %></h2>
+	<div class="row">
+		<div class="span11">
+		   <%= form_tag "/reservations" do %>
+		   <%= render 'shared/reservations/reservationform', vehicle: nil, res: @reservation, act: 'new' %>
+		   <div class="center-button">
+			   <%= submit_tag "Make Reservation", class: "btn btn-large btn-primary" %>
+		   </div>
+		   <% end %>
+		</div>
+	</div>
+</div>
+

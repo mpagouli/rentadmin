@@ -1,19 +1,7 @@
 <div id="res_error_explanation"></div>
 <div class="row">
 	<div class="span11">
-		<%= text_field_tag 'vehicleid', vehicle.id %>
-		<div class="inline">
-			<%= label_tag "veh_reg_no", 'Licence Plate' %>
-			<%= text_field_tag 'veh_reg_no', vehicle.reg_no, :readonly => true %>
-		</div>
-		<div class="inline">
-			<%= label_tag "veh_make", 'Make' %>
-			<%= text_field_tag 'veh_make', vehicle.model.make.make_name, :readonly => true %>
-		</div class="inline">
-		<div>
-			<%= label_tag "veh_model", 'Model' %>
-			<%= text_field_tag 'veh_model', vehicle.model.model_name, :readonly => true %>
-		</div>
+		 <%= render 'shared/reservations/vehicle', vehicle: vehicle, act: 'new' %>
 	</div>
 </div>
 <div class="row">

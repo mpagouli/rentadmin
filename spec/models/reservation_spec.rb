@@ -20,7 +20,7 @@ describe Reservation do
   before { @model = Model.new(model_name:"model")
   	       @make = Make.new(make_name:"make")
   	       @vehicle = Vehicle.new(reg_no:"AXB 1234") 
-           @client = Client.new(name: "Amy", surname:"Whinehouse",email:"amy@example.com")
+           @client = Client.new(name: "Amy", surname:"Whinehouse",email:"amy@example.com", identity_number: "ID 9876543")
   	       @model.make = @make
            @vehicle.model = @model
            @res = Reservation.new(reservation_code:'123456789', pick_up_date: Date.new(2012, 7, 9), drop_off_date:Date.new(2012,7,19), duration:11)

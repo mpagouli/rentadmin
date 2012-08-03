@@ -37,9 +37,10 @@ div#timeline_container{
     background:gray;
     border-radius : 7px;
 }
-.running{
-    background:orange;
+.deleted{
+    background:black;
     border-radius : 7px;
+    color:white;
 }
 
 .res_pickup_time{

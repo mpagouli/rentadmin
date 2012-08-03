@@ -1,12 +1,12 @@
 <div id="book_vehicle_dialog" title="New Reservation">
 	<div class="row">
 	  <div class="span11">
-	    <%= form_tag "#" do %>
+	    <%# form_tag "#" do %>
 	      <%= render 'shared/reservations/reservationform', vehicle: vehicle, res: res, act: 'new' %>
 	      <div class="center-button">
-			<%= submit_tag "Make Reservation", class: "btn btn-large btn-primary" %>
+			<%= button_tag "Make Reservation", class: "btn btn-large btn-primary" %>
 		  </div>
-	    <% end %>
+	    <%# end %>
 	  </div>
 	</div>
 </div>
