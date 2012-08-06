@@ -1,0 +1,18 @@
+<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="span11">
+		<div>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+
+			<%= f.label :surname %>
+			<%= f.text_field :surname %>
+
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+
+			<%= f.label :identity_number %>
+			<%= f.text_field :identity_number %>
+		</div>
+	</div>
+</div>

@@ -8,8 +8,24 @@
 			<%= text_field_tag 'model_name', nil, :placeholder => 'Enter model name...' %>
 		</div>
 		<div>
+			<%= label_tag "group" do %>
+				<%= link_to '#', :class => 'add_group', :title => 'Add new group' do %>
+					<i class="icon-plus-sign"></i>
+				<% end %>
+				<%= link_to '#', :class => 'edit_group', :title => 'Edit selected group' do %>
+					<i class="icon-pencil"></i>
+				<% end %>
+				<%= link_to '#', :class => 'delete_group', :title => 'Delete selected group' do %>
+					<i class="icon-minus-sign"></i>
+				<% end %> Group
+			<% end %>
+			<%= select("group", "id", options_from_collection_for_select(Group.all, "id", "group_name"), { :include_blank => true }) %>
+		</div>
+		<div>
 			<%= label_tag "model_description", 'Description' %>
 			<%= text_area_tag 'model_description', nil, :rows => 7, :cols => 25, :placeholder => 'Enter model description...', :escape => true %>
 		</div>
 	</div>
 </div>
+
+<%= render :partial => 'vehicles/make_model/new_group', :locals => { group: Group.new } %>

@@ -28,7 +28,7 @@ describe "Reservations" do
       before do  
         31.times { |n| FactoryGirl.create(:reservation, vehicle: vehicle, client: customer) }
         visit operation_path
-      visit reservations_path
+        visit reservations_path
       end
       after  do 
         Reservation.delete_all
@@ -68,28 +68,30 @@ describe "Reservations" do
       it "by not inserting the reservation" do
         expect { click_button submit }.not_to change(Reservation, :count)
       end
-      describe "by containing error messages" do
+      describe "pick up date and drop off date" do
         before { click_button submit }
-        it "should contain error messages" do
-          should have_selector('div.alert.alert-error', text:"error")
+        it "error message" do
+          should have_content('Pick-up and drop-off dates are required!')
         end
-        it "should contain error message for reservation code" do
-          should have_selector('li', text:"Reservation code is required")
-        end
-        it "should contain error message for vehicle" do
-          should have_selector('li', text:"Vehicle is required")
-        end
-        it "should contain error message for customer" do
-          should have_selector('li', text:"Customer is required")
-        end
-        it "should contain error message for pick up date" do
-          should have_selector('li', text:"Pick-up date is required")
-        end
-        it "should contain error message for drop off date" do
-          should have_selector('li', text:"Drop-off date is required")
-        end
-        
       end
+      #describe "vehicle" do
+      #  before do 
+      #    #fill_in ""
+      #    click_button submit 
+      #  end
+      #  
+      #  it "should contain error message for reservation code" do
+      #    should have_content('Reservation code is required')
+      #    #should have_xpath("//[contains(text(), 'different')]")
+      #  end
+      #  it "should contain error message for vehicle" do
+      #    should have_content('Vehicle is required')
+      #  end
+      #  it "should contain error message for customer" do
+      #    should have_content('Customer is required')
+      #  end
+      #  
+      #end
     end
     #debugger
     it { should have_selector('select#vehicle_id') }
@@ -144,8 +146,8 @@ describe "Reservations" do
         another_make.save
         another_model1.save
         another_model2.save
-        sign_in admin
-        visit admin_path
+        sign_in user
+        visit operation_path
     end
     after do
       Make.delete_all

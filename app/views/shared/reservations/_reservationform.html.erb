@@ -1,22 +1,30 @@
+<%= render 'shared/flash_messages' %>
+<%= if !res.nil? 
+	render 'shared/error_messages', object: res 
+end %>
 <div id="res_error_explanation"></div>
+
 <div class="row">
 	<div class="span11">
-		 <%= render 'shared/reservations/vehicle', vehicle: vehicle, act: 'new' %>
+		 <%= render 'shared/reservations/vehicle', vehicle: vehicle, act: act %>
 	</div>
 </div>
 <div class="row">
 	<div class="span11">
 		<div class="inline">
+
 			<%= label_tag "pick_up_date", 'Pick Up Date' %>
-			<%= text_field_tag 'pick_up_date', nil %>
+			<%= text_field_tag 'sel_pickup', res.nil? || res.pick_up_date.nil? ? nil : res.pick_up_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M') %>
+			<%= text_field_tag 'pick_up_date', nil  %>
 		</div>
 		<div class="inline">
 			<%= label_tag "drop_off_date", 'Drop Off Date' %>
+			<%= text_field_tag 'sel_dropoff', res.nil? || res.drop_off_date.nil? ? nil : res.drop_off_date.in_time_zone(Time.zone).strftime('%d/%m/%Y %H:%M') %>
 			<%= text_field_tag 'drop_off_date', nil %>
 		</div>
 		<div class="inline">
 			<%= label_tag "duration", 'Duration' %>
-			<%= text_area_tag 'duration', nil, :rows => 2, :cols => 25, :readonly => true %>
+			<%= text_area_tag 'duration', act=='new' ? nil : @duration, :rows => 2, :cols => 25, :readonly => true %>
 		</div>
 	</div>
 </div>
@@ -42,14 +50,15 @@
 		</div>
 		<div class="inline">
 			<%= label_tag "reservation_code", 'Reservation Code' %>
-			<%= text_field_tag 'reservation_code', nil %>
+			<%= text_field_tag 'reservation_code', act=='new' ? nil : @reservation.reservation_code, :readonly => act=='edit' ? true : false %>
 		</div>
+
 		<div class="inline">
 			<%= label_tag "status", 'Status' %>
 			<%= if act == 'new'
 					select("status", "id", ReservationStatus.to_select, { :include_blank => true, :selected => 1 })
 				else
-					select("status", "id", ReservationStatus.to_select, { :include_blank => false, :selected => res.status(:id) })
+					select("status", "id", ReservationStatus.to_select, { :include_blank => false, :selected => res.status })
 				end %>
 		</div>
 	</div>

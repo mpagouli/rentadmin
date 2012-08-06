@@ -1,2 +1,12 @@
-<h1>Clients#new</h1>
-<p>Find me in app/views/clients/new.html.erb</p>
+<% provide(:title, 'New Customer') %>
+<div class="main-content">
+	<h1><%= yield(:title) %></h1>
+	<div class="row">
+	  <div class="span6 offset3">
+	    <%= form_for(@client) do |f| %>
+	      <%= render 'clientform', f: f %>
+	      <%= f.submit "Insert Customer", class: "btn btn-large btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
+</div>

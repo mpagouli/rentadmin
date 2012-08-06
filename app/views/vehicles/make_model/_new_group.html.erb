@@ -1,0 +1,12 @@
+<div id="group_new_dialog" title="New Group">
+	<div class="row">
+	  <div class="span3">
+	    <%# form_tag "#" do %>
+	      <%= render :partial => 'vehicles/make_model/groupform', :locals => { group: group } %>
+	      <div class="center-button">
+			<%= button_tag "Insert Group", class: "btn btn-large btn-primary" %>
+		  </div>
+	    <%# end %>
+	  </div>
+	</div>
+</div>

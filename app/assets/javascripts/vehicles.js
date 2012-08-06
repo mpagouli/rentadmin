@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
+	var page_title = $(this).attr('title');
+
 	//Index
-	if( $(".vehicles") !== undefined ){
+	if( $(this).attr('title').indexOf('Vehicles') !== -1 ){
 		$('.right-button form input').addClass('btn btn-large btn-primary');
 		$('.right-button .button_to').attr('method','get');
 	}
@@ -10,7 +12,7 @@ $(document).ready(function() {
 
 
 	//New - Edit
-	if( $(".vehicle-form") !== undefined ){
+	if( $(this).attr('title').indexOf('New Vehicle') !== -1 || $(this).attr('title').indexOf('Edit Vehicle') !== -1){
 
 		$("#msg_dialog").dialog({ 
         	autoOpen:false,
@@ -69,7 +71,7 @@ $(document).ready(function() {
 				});
 			});
 			$("input#makeid").attr('value',$("#make_id").find(":selected").attr('value'));
-			$("#make_new_dialog .center-button button").attr('value','Insert Make');
+			$("#make_new_dialog .center-button button").html('Insert Make');
 			$("input#make_name").attr('value','');
 			$("textarea#make_description").attr('value','');
 			$("#make_new_dialog").dialog('option','title','New Make');
@@ -86,7 +88,7 @@ $(document).ready(function() {
 				dataType: 'json',
 				success: function(data) { 
 				 if(data.success){
-				 	$("#make_new_dialog .center-button button").attr('value','Save changes');
+				 	$("#make_new_dialog .center-button button").html('Save changes');
 				 	$("input#makeid").attr('value',data.make.id);
 				  	$("input#make_name").attr('value',data.make.make_name);
 					$("textarea#make_description").attr('value',data.make.description);
@@ -236,7 +238,7 @@ $(document).ready(function() {
 				ee.preventDefault();
 				$.ajax({
 				  url: '/savemodel',
-				  data: 'makeid='+$("input#makeid").attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
+				  data: 'makeid='+$("input#makeid").attr('value')+'&groupid='+$('#group_id').attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
 				  dataType: 'json',
 				  success: function(data) { 
 				  	if(data.success){
@@ -273,15 +275,19 @@ $(document).ready(function() {
 		//Edit Model Dialog.............................................................
 		$(".edit_model").click(function(e){
 			e.preventDefault();
-			var selectedid = $("#model_id").find(":selected").attr('value');
+			var selectedidb = $("#model_id").find(":selected")
+			var selectedid = selectedidb.attr('value');
 			$.ajax({
 				url: '/modelopen',
 				data: 'modelid='+selectedid,
 				dataType: 'json',
 				success: function(data) { 
 				 if(data.success){
-				 	$("#model_new_dialog .center-button button").attr('value','Save changes');
+				 	$("#model_new_dialog .center-button button").html('Save changes');
 				 	$("input#modelid").attr('value',data.model.id);
+				 	if(data.model.group_id !== undefined){
+				  		$("select#group_id").attr('value',data.model.group_id);
+				  	}
 				  	$("input#model_name").attr('value',data.model.model_name);
 					$("textarea#model_description").attr('value',data.model.description);
 					$("#model_new_dialog").dialog('option','title','Edit Model');
@@ -299,15 +305,15 @@ $(document).ready(function() {
 				ee.preventDefault();
 				$.ajax({
 				  url: '/modelmodify',
-				  data: 'modelid='+$("input#modelid").attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
+				  data: 'modelid='+$("input#modelid").attr('value')+'&groupid='+$('#group_id').attr('value')+'&model_name='+$("input#model_name").attr('value')+'&model_description='+$("textarea#model_description").attr('value'),
 				  dataType: 'json',
 				  success: function(data) { 
 				  	if(data.success){
-				  		$('#model_id').find(':selected').removeAttr('selected');
-				  		var opt = $('#model_id').find("option[value='"+$("input#modelid").attr('value')+"']");
+				  		/*$('#model_id').find(':selected').removeAttr('selected');
+				  		var opt = $('#model_id').find("option[value='"+$("input#modelid").attr('value')+"']").removeAttr('selected');
 				  		opt.html(data.model.model_name);
 				  		opt.attr('selected','selected');
-				  		$('#model_id').trigger('change');
+				  		$('#model_id').trigger('change');*/
 				  		$('#model_id').next("label").html("Modified selected model");
 				  		$("#model_new_dialog").dialog('close');
 				  	}
@@ -359,7 +365,7 @@ $(document).ready(function() {
 				    	$("div#msg_dialog").dialog('option','title','Success');
 				    	$("#msg_dialog").dialog('open');
 				  		$('#model_id').find(':selected').remove();
-				  		$('#modele_id').find("option[value='']").attr('selected');
+				  		$('#model_id').find("option[value='']").attr('selected');
 				  		$('#model_id').trigger('change');
 				  		$('#model_id').next("label").html("Deleted model of selected make");
 				  	}
@@ -499,7 +505,7 @@ $(document).ready(function() {
 				});
 			});
 			//$("input#vehicleid").attr('value',$("#sel_vehicle_id").attr('value'));
-			$("#book_vehicle_dialog .center-button button").attr('value','Make Reservation');
+			$("#book_vehicle_dialog .center-button button").html('Make Reservation');
 			//$("input#resid").attr('value','');
 			//$("input#model_name").attr('value','');
 			//$("textarea#model_description").attr('value','');

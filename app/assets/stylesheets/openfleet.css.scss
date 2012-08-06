@@ -268,7 +268,7 @@ footer {
 
 /* forms */
 
-#error_explanation, #make_error_explanation, #model_error_explanation, #res_error_explanation {
+#error_explanation, #make_error_explanation, #model_error_explanation, #res_error_explanation, #group_error_explanation {
   color: #f00;
   ul {
     list-style: none;
@@ -283,7 +283,7 @@ footer {
 
 
 
- /* users index */
+ /* Users */
 
 .users {
   list-style: none;
@@ -300,7 +300,7 @@ footer {
 
 
 
-/* Vehicles index */
+/* Vehicles */
 
 div.vehicles{
   
@@ -359,12 +359,15 @@ div.vehicles{
 
 
 /* Dialogs */
-div#make_new_dialog, div#model_new_dialog{
+div#make_new_dialog, div#model_new_dialog, div#group_new_dialog{
   overflow:hidden;
   .center-button{
     margin-top:5px;
     text-align:center;
   }
+}
+div#group_new_dialog{
+  /*z-index:2050;*/
 }
 div#msg_dialog, div#confirm_dialog{
   overflow:hidden;
@@ -391,7 +394,7 @@ div#book_vehicle_dialog, div#new_reservation{
 
 
 
-/* Models index */
+/* Models */
 
 div.models {
   margin: 0;
@@ -443,6 +446,13 @@ div.model-index-image{
     font-weight:normal;
     font-size:13px;
   }
+}
+
+
+
+/* Reservations */
+select#vehicle_id{
+  width:260px;
 }
 
 

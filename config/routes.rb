@@ -1,9 +1,5 @@
 Rentadmin::Application.routes.draw do
 
-  get "groups/new"
-
-  get "clients/new"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -107,9 +103,14 @@ Rentadmin::Application.routes.draw do
   match '/modelopen', to: 'models#modelopen'
   match '/modelmodify', to: 'models#modelmodify'
   match '/dropmodel', to: 'models#dropmodel'
+  match '/savegroup', to: 'groups#savegroup'
+  match '/groupopen', to: 'groups#groupopen'
+  match '/groupmodify', to: 'groups#groupmodify'
+  match '/dropgroup', to: 'groups#dropgroup'
   match '/book_vehicle', to: 'reservations#book_vehicle'
   match '/show_duration', to: 'reservations#show_duration'
   match '/check_booked_dates', to: 'reservations#check_booked_dates'
+  match '/check_booked_vehicles', to: 'reservations#check_booked_vehicles'
   match '/timeline_ajax', to: 'timeline#timeline_ajax'
 
 

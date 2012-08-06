@@ -18,7 +18,9 @@ class ModelsController < ApplicationController
     #Ajax
     def savemodel
 	  #return render :text => "Param is #{params[:makeid]}"
+    @group = params[:groupid].blank? ? nil : Group.find(params[:groupid])
 	  @model = Make.find(params[:makeid]).models.build(model_name: params[:model_name], description: params[:model_description])
+    @model.group = @group
 	  respond_to do |format|
 	    if @model.save
           format.json { render :json =>  { model: @model, errors: nil, success:true } }
@@ -51,7 +53,16 @@ class ModelsController < ApplicationController
   @model = Model.find(params[:modelid])
   respond_to do |format|
     if @model.update_attributes(:model_name => params[:model_name], :description => params[:model_description])
-        format.json { render :json =>  { model: @model, errors: nil, success:true } }
+        @model.group = params[:groupid].blank? ? nil : Group.find(params[:groupid])
+        if @model.save
+          format.json { render :json =>  { model: @model, errors: nil, success:true } }
+        else
+          @errors = []
+          @model.errors.each do |key,value|
+            @errors.push(value)
+          end
+          format.json { render :json =>  { model: @model, errors: @errors, success:false } }
+        end
       else
         @errors = []
         @model.errors.each do |key,value|

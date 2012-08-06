@@ -1,0 +1,15 @@
+<% provide(:title, @reservation.reservation_code) %>
+<div class="main-content">
+	<h2><%= yield(:title) %></h2>
+	<%= render 'shared/flash_messages' %>
+	<div class="row">
+		<div class="span11">
+			<%= "#{@reservation.vehicle.model.make.make_name} #{@reservation.vehicle.model.model_name}" %>
+			<%= "#{@reservation.client.name} #{@reservation.client.surname} " %>
+			<%= "From: #{@reservation.pick_up_date} To:#{@reservation.drop_off_date} " %>
+			<p>
+			<%= link_to "edit", edit_reservation_path(@reservation) %> | 
+			<%= link_to "delete", @reservation, method: :delete, data: { confirm: "Are you sure?" } %> </p>
+		</div>
+	</div>
+</div>

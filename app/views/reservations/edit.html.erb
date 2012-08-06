@@ -1,0 +1,14 @@
+<%= provide(:title,'Edit Reservation') %>
+<div id="edit_reservation"class="main-content">
+	<h2><%= @reservation.reservation_code %></h2>
+	<div class="row">
+		<div class="span11">
+		   <%= form_tag "/reservations/#{@reservation.id}", :method => :put  do %>
+		   <%= render 'shared/reservations/reservationform', vehicle: @reservation.vehicle, res: @reservation, act: 'edit' %>
+		   <div class="center-button">
+			   <%= submit_tag "Save Changes", class: "btn btn-large btn-primary" %>
+		   </div>
+		   <% end %>
+		</div>
+	</div>
+</div>

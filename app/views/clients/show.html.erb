@@ -1,0 +1,14 @@
+<% provide(:title, @client.name) %>
+<div class="main-content">
+	<h1><%= yield(:title) %></h1>
+	<%= render 'shared/flash_messages' %>
+	<div class="row">
+		<div class="span11">
+			<%= "#{@client.name} #{@client.surname}" %>
+			<%= @client.identity_number %>
+			<%= @client.email %>
+			<%= link_to "edit", edit_client_path(@client) %> | 
+			<%= link_to "delete", @client, method: :delete, data: { confirm: "Are you sure?" } %>
+		</div>
+	</div>
+</div>

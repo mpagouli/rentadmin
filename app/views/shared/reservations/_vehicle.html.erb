@@ -1,15 +1,21 @@
 <% if vehicle.nil? && act == 'new' %>
 
-	<div class="inline">
-		<%= label_tag "vehicle", 'Vehicle' %>
+	<div class="inline control-group warning">
+		<%= label_tag "vehicle" do %>
+			Vehicles (<%= Vehicle.all.count %> available)
+		 <% end %>
 		<%= select("vehicle", "id", Vehicle.all.collect { |v| ["#{v.model.make.make_name} #{v.model.model_name} (#{v.reg_no})", v.id]}, { :include_blank => true } ) %>
+		<label>Select dates to filter available vehicles list</label>
 	</div>
 
 <% elsif !vehicle.nil? && act == 'edit' %>
 
 	<div class="inline">
-		<%= label_tag "vehicle", 'Vehicle' %>
-		<%= select("vehicle", "id", Vehicle.all.collect { |v| ["#{v.model.make.make_name} #{v.model.model_name} (#{v.reg_no})", v.id]}, { :include_blank => false, :selected => vehicle.id } ) %>
+		<%= label_tag "vehicle" do %>
+			Vehicles (<%= Vehicle.all.count %> available)
+		 <% end %>
+		<%= select("vehicle", "id", Vehicle.all.collect { |v| ["#{v.model.make.make_name} #{v.model.model_name} (#{v.reg_no})", v.id]}, { :include_blank => true, :selected => vehicle.id } ) %>
+		<label>Select dates to filter available vehicles list</label>
 	</div>
 
 <% elsif !vehicle.nil? %>

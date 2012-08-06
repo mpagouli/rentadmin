@@ -4,7 +4,7 @@
       The form contains <%= pluralize(object.errors.count, "error") %>.
     </div>
     <ul>
-      <% if object.is_a?(Vehicle)
+      <% if object.is_a?(Vehicle) or object.is_a?(Client)
         object.errors.each_with_index do |msg,i| %>
           <li>* <%= msg[1] %></li>
         <% end
