@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var page_title = $(this).attr('title');
+	//var page_title = $(this).attr('title');
 
 	//Index
 	if( $(this).attr('title').indexOf('Vehicles') !== -1 ){

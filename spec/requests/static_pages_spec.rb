@@ -41,9 +41,6 @@ describe "StaticPages" do
         before { click_link "Administration" }
         it { should have_selector('title', text: full_title('Admin')) }
       end
-      context "selecting Admin Menu Item" do
-        #####################################################################################
-      end
     end 
     describe "Navigation Bar Links" do
       describe "Help" do
@@ -69,8 +66,76 @@ describe "StaticPages" do
         it { should have_selector('title', text: full_title('Board')) }
       end
     end 
-    describe "steering wheel menu" do
-      ######################################################################################
+    describe "steering wheel menu:", :js => true do
+      context "Double Click" do
+        before do
+          page.execute_script("$('#wheelmenu').trigger('dblclick');")
+        end
+        it { should have_selector('title', text: full_title('Operation')) }
+      end
+      context "Click and then Double Click" do
+        before do
+          page.execute_script("$('#wheelmenu').trigger('click');")
+          sleep 5
+          page.execute_script("$('#wheelmenu').trigger('dblclick');")
+          #save_and_open_page
+        end
+        it { should have_selector('title', text: full_title('Board')) }
+      end
+      context "Click twice and then Double Click" do
+        context "as simple user" do
+          before do
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('dblclick');")
+          end
+          it { should have_selector('title', text: full_title('Operation')) }
+        end
+        context "as administrator" do
+          let(:admin) { FactoryGirl.create(:admin) }
+          before do
+            sign_out user
+            sign_in admin
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('dblclick');")
+          end
+          it { should have_selector('title', text: full_title('Admin')) }
+        end
+      end
+      context "Click three times and then Double Click" do
+        context "as simple user" do
+          before do
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('dblclick');")
+          end
+          it { should have_selector('title', text: full_title('Board')) }
+        end
+        context "as administrator" do
+          let(:admin) { FactoryGirl.create(:admin) }
+          before do
+            sign_out user
+            sign_in admin
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('click');")
+            sleep 5
+            page.execute_script("$('#wheelmenu').trigger('dblclick');")
+          end
+          it { should have_selector('title', text: full_title('Operation')) }
+        end
+      end
     end
   end
 
