@@ -23,7 +23,7 @@ group :development do
   gem 'annotate',    '~> 2.4.1.beta'
 end
 
-gem 'jquery-rails', '2.0.0'
+gem 'jquery-rails', '3.1.5'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.0.1'
